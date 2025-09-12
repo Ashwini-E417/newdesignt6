@@ -26,7 +26,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
      
-
+      .galleryImageContainer {
+        display: grid;
+        grid-template-columns: 75% 25%;
+        gap: 10px;
+        background-color: dodgerblue;
+        padding: 10px;
+        width: 100%;
+      }
+      .galleryImage:nth-child(1) {
+        grid-column: 1 / span 2;
+      }
 
     </style>
 </head>
@@ -36,7 +46,14 @@
     <div class="gallery-container">
       <h2 class="section-headingCenter">Gallery</h2>
       <p class="section-subHeading">See it to belive it</p>
-      hello all
+      <div class="galleryImageContainer">
+        <img src="assets/images/gallery/g1.webp" alt="g1" loading="lazy" class="galleryImage" />
+        <img src="assets/images/gallery/g2.webp" alt="g1" loading="lazy" class="galleryImage" />
+        <img src="assets/images/gallery/g3.webp" alt="g1" loading="lazy" class="galleryImage" />
+        <img src="assets/images/gallery/g4.webp" alt="g1" loading="lazy" class="galleryImage" />
+        <img src="assets/images/gallery/g5.webp" alt="g1" loading="lazy" class="galleryImage" />
+        <img src="assets/images/gallery/g6.webp" alt="g1" loading="lazy" class="galleryImage" />
+      </div>
     </div>
   </section>
 
