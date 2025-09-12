@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    .location-wrapper {
+        padding: 5vh 5vw;
+    }
+    .location-flexContainer {
+        display: flex;
+        gap: 2%;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .location-rightContainer {
+        flex: 0 0 48%;
+        border: 1px solid var(--firstlight);
+    }
+
+    .map-connectivity-section {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom:10px;
+}
+
+.map-connectivity-header {
+  background: var(--firstlight);
+  padding: 1vh;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color .3s;
+  gap: 5%;
+}
+
+.map-connectivity-header:hover {
+  background: #f0f1f2
+}
+
+.map-connectivity-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333
+}
+
+.map-connectivity-arrow {
+  font-size: 16px;
+  color: #666;
+  transition: transform .3s
+}
+
+.map-connectivity-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s
+}
+
+.map-connectivity-content.map-active {
+  max-height: 800px;
+  padding-bottom: 1rem;
+}
+
+.map-connectivity-items {
+  padding: 20px
+}
+
+.map-advantage-item {
+  /* display: flex;
+  align-items: flex-start;
+  gap: 25px; */
+  margin-bottom: 2vh;
+}
+
+.footer-rera-item:last-child,
+.map-advantage-item:last-child {
+  margin-bottom: 0
+}
+
+.map-advantage-number {
+  /* width: 40px;
+  height: 40px; */
+  /* border-radius: 50%; */
+  background: var(--firstlight);
+  color: var(--darkest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0 */
+  width: fit-content;
+  height: auto;
+  padding: 1vh 5vw;
+  border-radius: 15px;
+}
+
+/* .map-advantage-content {
+  flex: 1;
+  padding-top: 8px
+} */
+
+.map-advantage-text {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.4
+}
+.progressbar {
+    height: 2px;
+    background: var(--darkest);
+}
+.map-connectivity-count {
+    border: 1px solid var(--darkest);
+    padding: 2vh 2vw;
+    border-radius: 4px;
+}
+@media (max-width:768px) {
+    .location-flexContainer {
+        flex-direction: column;
+        gap: 5vh;
+    }
+}
+</style>
+</head>
+<body>
+    <section >
+        <div class="location-wrapper">
+            <h2 class="section-headingCenter">Location Advantages</h2>
+            <p class="section-subHeading">Explore Neighbourhood</p>
+            <div class="location-flexContainer">
+                <div class="location-rightContainer">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2869.492024637345!2d72.9892725!3d19.2332529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bbbcd4f20c15%3A0x4c36bff2609ee7cf!2sLodha%20Amara%20Thane!5e1!3m2!1sen!2sin!4v1751889832611!5m2!1sen!2sin" width=100% height=350 style=border:0;display:block; allowfullscreen loading=lazy title="Lodha Amara Location Map" referrerpolicy=no-referrer-when-downgrade loading="lazy"></iframe>
+                </div>
+                <div class="location-rightContainer">
+                    
+                    <div class=map-connectivity-section>
+                        <div class="progressbar"></div>
+<div class=map-connectivity-header onclick=toggleConnectivity(0)>
+<span class="map-connectivity-count">1</span>
+<h3 class=map-connectivity-title>Connectivity</h3>
+<!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+</div>
+<div class="map-connectivity-content map-active connectivityContent">
+
+<div class=map-connectivity-items>
+
+<div class=map-advantage-item>
+<div class=map-advantage-text>Kempegowda International Airport</div>
+<div class=map-advantage-number>12 mins</div>
+</div>
+
+<div class=map-advantage-item>
+<div class=map-advantage-text>Kempegowda International Airport</div>
+<div class=map-advantage-number>12 mins</div>
+</div>
+
+<div class=map-advantage-item>
+<div class=map-advantage-text>Kempegowda International Airport</div>
+<div class=map-advantage-number>12 mins</div>
+</div>
+
+
+<div class=map-advantage-item>
+<div class=map-advantage-text>Kempegowda International Airport</div>
+<div class=map-advantage-number>12 mins</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+<div class="downloadButtonContainer">
+<button class="downloadButton">Enquire Now</button>
+</div>
+
+
+
+                </div>
+    </section>
+
+    <script>
+        function toggleConnectivity(index) {
+            // Desktop version
+            // const content = document.getElementById('connectivityContent');
+            // const arrow = document.getElementById('connectivityArrow');
+            
+            // if (content && content.classList.contains('map-active')) {
+            //     content.classList.remove('map-active');
+            //     arrow.textContent = 'â–¶';
+            // } else if (content) {
+            //     content.classList.add('map-active');
+            //     arrow.textContent = 'â–¼';
+            // }
+            
+            
+
+            
+            
+            const content = document.getElementsByClassName('connectivityContent')[index];
+            const arrow = document.getElementsByClassName("connectivityArrow")[index];
+                    if (content && content.classList.contains('map-active')) {
+                        content.classList.remove('map-active');
+                        arrow.textContent = '▶';
+                    } else if (content) {
+                        content.classList.add('map-active');
+                        arrow.textContent = '▼';
+                    }
+
+            
+            // const mobileContent = document.getElementsByClassName('connectivityContentMobile')[index];
+            // const mobileArrow = document.getElementsByClassName('connectivityArrowMobile')[index];
+            // if (mobileContent && mobileContent.classList.contains('map-active')) {
+            //     mobileContent.classList.remove('map-active');
+            //     mobileArrow.textContent = 'â–¶';
+            // } else if (mobileContent) {
+            //     mobileContent.classList.add('map-active');
+            //     mobileArrow.textContent = 'â–¼';
+            // }
+        }
+    </script>
+</body>
+</html>

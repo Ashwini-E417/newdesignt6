@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview</title>
+    <!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-display: swap;
+            font-size: clamp(1rem,1vw,2rem);
+        }
+        :root {
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+        }
+        body {
+            font-family: "Noto Sans",Tahoma, sans-serif;
+        }
+        .overview-Container {
+            padding: 5vh 5vw;
+            /* display: flex;
+            gap: 2%; */
+        }
+        /* .overview-flexLeftContainer {
+            flex: 0 0 48%;
+        } */
+        .overviewImg {
+            width: 48%;
+            float: left;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            margin-right: 2%;
+            /* box-shadow: 0 0 5px 5px #dfdfdf; */
+        }
+        .overviewImg2 {
+            width: 100%;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            height: auto;
+            display: none;
+        }
+        .section-subHeading {
+            font-size: clamp(1.5rem, 2vw, 2.2rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            text-align: center;
+        }
+        .clampText {
+            font-size: clamp(1rem, 1.2vw, 1.1rem);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            display: block;
+            overflow: hidden;
+            max-height: 8rem;
+            /* transition: all 0.5s cubic-bezier(0.2, 1, 0.4, 0); */
+            transition:  max-height 0.4s ease;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .clampText::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2rem;
+            background: linear-gradient(transparent, var(--bg-white));
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .clampText-overflow {
+            max-height: 1000rem;
+        }
+
+        .clampText-overflow::after {
+            opacity: 0;
+        }
+        .readMoreLink {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: green;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid green;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .readMoreLink::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: green;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .readMoreLink:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .readMoreLink:hover::before {
+            left: 0;
+        }
+
+        @media (max-width:600px) {
+            /* .overview-Container {
+                flex-direction: column-reverse;
+            } */
+            /* .overview-flexRightContainer {
+                margin-bottom: 2vh;
+            } */
+            .overviewImg {
+                display: none;
+            }
+            .overviewImg2 {
+                display: block;
+                margin-top: 1rem;
+            }
+        }
+        </style>
+        <style>
+            .section-headingCenter {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            background: green;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: .5rem;
+            position: relative;
+            text-align: center;
+        }
+
+        /* .section-headingCenter::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: green;
+            border-radius: 2px;
+        } */
+            .highlight-Container {
+                background-color: rgb(0,255,0,0.1);
+                padding: 5vh 5vw;
+                text-align: center;
+            }
+            .highlight-pointContainer {
+                display: flex;
+                gap: 3%;
+                flex-wrap: wrap;
+            }
+            .highlightPoint {
+                flex: 0 0 48%;
+                border-radius: 10px;
+                padding: 2vh 1vw;
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                background: #fff;
+                box-shadow:  0 0 1px 1px rgb(0, 128, 0, 0.1);
+                margin-bottom: 1rem;
+                transition: transform 0.3s ease-in-out;
+            }
+            .highlightPoint:hover {
+                transform: translateY(-3px);
+            }
+            .highlightpoint-Number {
+                /* background-color: #fff; */
+                /* border: 1px solid rgb(0, 128, 0,0.5); */
+                box-shadow: 0 0 0.5px 0.5px rgb(0,128,0,0.1);
+                padding: 1rem;
+                border-radius: 10px;
+                font-size: clamp(1rem,2.5vh,2rem);
+                font-weight: 600;
+                color: #888;
+            }
+            .highlightpoint-content {
+                color: #000;
+            }
+            @media (max-width:600px) {
+                .highlightPoint {
+                    flex: 0 0 100%;
+                }
+            }
+
+        </style>
+</head>
+<body>
+    <section class="section-container">
+        <div class="overview-Container">
+            <div class="overview-flexRightContainer">
+                <h2 class="section-headingCenter">Overview</h2>
+                <p class="section-subHeading">Welcome to Candeur Skyline</p>
+                <p class="clampText">
+                    <img src="assets/images/extra/overviewImg1.webp" alt="Overview" loading="lazy" class="overviewImg" width="100%" height="100%"/>
+                    Candeur Skyline by Candeur Constructions brings unmatched luxury to the Financial District, Hyderabad. Spread across 4.04 acres, Candeur Skyline offers exclusive 4 BHK apartments and sky villas across 4 impressive towers, each soaring 58 storeys high with just 282 residences. At Candeur Skyline, residents experience refined living with world-class amenities, including a 60,000 sq. ft. clubhouse, Badminton Courts, Cricket Nets, a Barbeque Zone, Leisure Park, Hoops Court, Jogging Trail, Outdoor Fitness Station, Tot Lot, and a Herb Garden. More than just luxury, Candeur Skyline creates a vibrant community where neighbours connect and friendships flourish. With regular events, group activities, and recreational spaces, Candeur Skyline fosters a lifestyle of togetherness and belonging. Discover the perfect blend of privacy, community, and modern living at Candeur Skyline, where every day feels like a new experience. Choose Candeur Skyline, where life truly elevates.
+                </p>
+                <a href="#" class="readMoreLink">Read More ▶</a>
+
+                <img src="assets/images/extra/overviewImg1.webp" alt="Overview" loading="lazy" class="overviewImg2" width="100%" height="100%" />
+            </div>
+        </div>
+        
+    </section>
+    <section class="section-container">
+        <div class="highlight-Container">
+            <h2 class="section-headingCenter">Project Highlight</h2>
+            <p class="section-subHeading">Explore Candeur Skyline</p>
+            <div class="highlight-pointContainer">
+                <div class="highlightPoint">
+                    <p class="highlightpoint-Number">01</p>
+                    <p class="highlightpoint-content">4 Towers | 58 Storeys</p>
+                </div>
+                <div class="highlightPoint">
+                    <p class="highlightpoint-Number">02</p>
+                    <p class="highlightpoint-content">4.04 Acres | 282 Residences</p>
+                </div>
+                <div class="highlightPoint">
+                    <p class="highlightpoint-Number">03</p>
+                    <p class="highlightpoint-content">13 ft. Floor-to-Ceiling Height</p>
+                </div>
+                <div class="highlightPoint">
+                    <p class="highlightpoint-Number">04</p>
+                    <p class="highlightpoint-content">60,000 sq. ft. Amenities Space</p>
+                </div>
+                <div class="highlightPoint">
+                    <p class="highlightpoint-Number">05</p>
+                    <p class="highlightpoint-content">Wind & Earthquake-Resistant Structure</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll(".readMoreLink").forEach((element,index)=>{
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                const clamp = document.querySelectorAll(".clampText")[index];
+                if (clamp.classList.contains("clampText-overflow")) {
+                    clamp.classList.remove("clampText-overflow");
+                    element.innerHTML = "Read More ▶";
+                }
+                else {
+                    clamp.classList.add("clampText-overflow");
+                    element.innerHTML = "Read Less ◄";
+                }
+            })
+        })
+    </script>
+</body>
+</html>

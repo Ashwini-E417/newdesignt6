@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location </title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+        <!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    .location-wrapper {
+        padding: 5vh 5vw;
+    }
+    .toogle-buttonWrapper {
+        border: 1px solid var(--darkest);
+        width: fit-content;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        /* gap: 1vw; */
+        align-items: center;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    .map-button {
+        width: 120px;
+        padding: 1vh 0;
+        text-align: center;
+    }
+    .mapButton-divider {
+        height: -webkit-fill-available;
+        width: 1px;
+        background-color: var(--darkest);
+        color: var(--darkest);
+        /* border: 1px solid var(--darkest); */
+    }
+    .map-button.mapButton-active {
+        background-color: var(--firstlight);
+    }
+    .mapAccordion-container {
+        margin-top: 3vh;
+        display: none;
+    }
+    .mapAccordionContainer-active {
+        display: block;
+    }
+    .AccordionGridContainer {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 1vw;
+    }
+    @media (max-width:768px) {
+        .AccordionGridContainer {
+            grid-template-columns: repeat(1,1fr);
+        }
+    }
+
+</style>
+
+<style>
+.map-connectivity-section {
+  overflow: hidden;
+  margin-bottom:10px;
+  border: 1px solid var(--firstlight);
+  border-radius: 4px;
+  height: fit-content;
+}
+
+.map-connectivity-header {
+  background: var(--firstlight);
+  padding: 1vh;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* border-bottom: 1px solid #e0e0e0; */
+  transition: background-color .3s;
+  gap: 5%;
+}
+
+.map-connectivity-title {
+  font-weight: 700;
+  color: #333
+}
+
+.map-connectivity-arrow {
+  color: var(--thirddark);
+  /* transition: transform .3s */
+}
+
+.map-connectivity-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s
+}
+
+.map-connectivity-content.map-active {
+  max-height: 800px;
+  /* padding-bottom: 1rem; */
+}
+
+.map-connectivity-items {
+  padding: 1vh;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1vw;
+}
+
+.map-advantage-item {
+  /* display: flex;
+  align-items: flex-start;
+  gap: 25px; */
+  margin-bottom: 2vh;
+  text-align: center;
+  flex: 0 0 49%;
+}
+
+.map-advantage-number {
+  /* width: 40px;
+  height: 40px; */
+  /* border-radius: 50%; */
+  background: var(--verylight);
+  color: var(--darkest);
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  /* font-weight: 700;
+  flex-shrink: 0  */
+  width: fit-content;
+  height: auto;
+  padding: 1vh 2vw;
+  border-radius: 15px;
+  margin: 1vh auto;
+}
+
+/* .map-advantage-content {
+  flex: 1;
+  padding-top: 8px
+} */
+
+.map-advantage-text {
+  color: #000;
+  line-height: 1.4
+}
+.map-connectivity-count {
+    border: 1px solid var(--darkest);
+    padding: 1vh 1vw;
+    border-radius: 4px;
+    font-weight: 600;
+}
+@media (max-width:768px){
+    .map-connectivity-count {
+        padding: 0.5vh 2vw;
+    }
+    .map-connectivity-showmore {
+        display: none;
+    }
+}
+
+@media (min-width:769px) {
+    .AccordionGridContainer {
+        display: block;
+    }
+    .map-connectivity-section {
+        display: flex;
+        width: 100%;
+    }
+    .map-connectivity-header {
+        flex: 0 0 25%;
+    }
+    .map-connectivity-content {
+        flex: 0 0 75%;
+    }
+    .map-connectivity-content.map-active {
+        padding-bottom: 0;
+    }
+    .map-advantage-number {
+        margin: 1vh auto 0;
+    }
+    .map-connectivity-items {
+        display: flex;
+        gap: 1%;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .map-advantage-item {
+        flex: 0 0 49%;
+    }
+    .map-connectivity-showmore {
+        /* display: block; */
+        flex: 0 0 50%;
+        margin: auto 0;
+        text-align: center;
+    }
+    .map-connectivity-showmore.showhide {
+        /* display: none; */
+        flex: 0 0 0;
+        overflow: hidden;
+    }
+}
+@media (min-width:1024px) {
+    .map-advantage-item {
+        flex: 0 0 24%;
+    }
+}
+</style>
+</head>
+<body>
+    <section>
+        <div class="location-wrapper">
+            <h2 class="section-headingCenter">Location Advantages</h2>
+            <div class="toogle-buttonWrapper">
+                <button class="map-button">Map</button>
+                <div class="mapButton-divider"></div>
+                <button class="map-button mapButton-active">Connectivity</button>
+            </div>
+
+            <div class="mapAccordion-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2869.492024637345!2d72.9892725!3d19.2332529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bbbcd4f20c15%3A0x4c36bff2609ee7cf!2sLodha%20Amara%20Thane!5e1!3m2!1sen!2sin!4v1751889832611!5m2!1sen!2sin" width=100% height=350 style=border:0;display:block; allowfullscreen loading=lazy title="Lodha Amara Location Map" referrerpolicy=no-referrer-when-downgrade loading="lazy"></iframe>
+            </div>
+
+            <div class="mapAccordion-container mapAccordionContainer-active">
+            <div class="AccordionGridContainer">
+                <div class=map-connectivity-section>
+                    <div class=map-connectivity-header>
+                        <span class="map-connectivity-count">1</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore showhide">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content map-active connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+                <div class=map-connectivity-section>
+                    <div class=map-connectivity-header>
+                        <span class="map-connectivity-count">2</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+                <div class=map-connectivity-section>
+                    <div class=map-connectivity-header>
+                        <span class="map-connectivity-count">3</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+                 <div class=map-connectivity-section>
+                    <div class=map-connectivity-header >
+                        <span class="map-connectivity-count">4</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+            <div class="downloadButtonContainer">
+                <button class="downloadButton">Enquire Now</button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <script>
+        const mapButton = document.querySelectorAll(".map-button");
+        const mapAccordionContainer = document.querySelectorAll(".mapAccordion-container");
+        mapButton.forEach((element,index) => {
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                
+                if(element.classList.contains("mapButton-active")){
+                    return;
+                }
+
+                element.classList.add("mapButton-active");
+                mapAccordionContainer[index].classList.add("mapAccordionContainer-active");
+
+                const i = (index + 1) % mapButton.length;
+                mapButton[i].classList.remove("mapButton-active");
+                mapAccordionContainer[i].classList.remove("mapAccordionContainer-active");
+            })
+        });
+    </script>
+
+    <script>
+        const accrodionContainer = document.querySelectorAll(".map-connectivity-section");
+        const accordionContent = document.querySelectorAll(".map-connectivity-content");
+        const accordionContentPlaceholder = document.querySelectorAll(".map-connectivity-showmore");
+        let connectivityCounter = 0;
+        let connectivityTimer = setInterval(connectivityCollapse,5000);
+
+        function connectivityCollapse() {
+            accordionContentPlaceholder[connectivityCounter].classList.remove("showhide");
+            accordionContent[connectivityCounter].classList.remove("map-active");
+            console.log("remove",connectivityCounter);
+            
+            
+            increaseConnectivityCount();
+            console.log("add",connectivityCounter);
+
+            accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
+            setTimeout(()=>{
+                accordionContent[connectivityCounter].classList.add("map-active");
+            },300)
+        }
+        function increaseConnectivityCount() {
+            connectivityCounter = (connectivityCounter + 1) % accrodionContainer.length;
+        }
+        function resetConnectivityCounter() {
+            clearInterval(connectivityTimer);
+            connectivityTimer = setInterval(connectivityCollapse,5000);
+        }
+
+        accrodionContainer.forEach((element,index)=>{
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                for(i=0;i<accrodionContainer.length;i++){
+                    accordionContentPlaceholder[i].classList.remove("showhide");
+                    accordionContent[i].classList.remove("map-active");
+                }
+                resetConnectivityCounter();
+                connectivityCounter = index;
+                accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
+                setTimeout(()=>{
+                    accordionContent[connectivityCounter].classList.add("map-active");
+                },300);
+            });
+        });
+    </script>
+</body>
+</html>

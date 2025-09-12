@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-display: swap;
+        }
+        body {
+            font-family: "Noto Sans",Tahoma, sans-serif;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+        }
+        .popup-flexContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0px 0px 2px 2px rgb(0,255,0,0.2);
+            width: 70%;
+        }
+        .popup-leftContainer {
+            background-color: green;
+            color: white;
+            padding: 1vh 2vw;
+            border-radius: 10px 0 0 10px;
+            width: 50%;
+            height: -webkit-fill-available;
+            background-image: url(https://www.agarwalrealty.com/wp-content/uploads/2021/05/property-management-5-e1490569669241.jpg);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        .popup-rightContainer {
+            padding: 2vh 2vw;
+            width: 50%;
+        }
+        .popup-offerList {
+            padding: 2vh 0;
+            list-style-type: none;
+        }
+        .popup-offerList li {
+            display: flex;
+            gap: 1vw;
+            padding: 1vh 0 0;
+        }
+        .popup-offerList li span {
+            font-size: clamp(1rem,1.5vw,3rem);
+            font-weight: 400;
+        }
+        .popup-leftHeading {
+            font-size: clamp(2rem,3vw,6rem);
+            font-weight: 700;
+        }
+        .popup-leftSubheading {
+            font-size: clamp(1.5rem,2vw,4rem);
+            font-weight: 500;
+        }
+        .popup-rightHeading {
+            font-size: clamp(1.5rem,2vw,4rem);
+            font-weight: 600;
+            text-align: center;
+        }
+        .popup-rightSubheading {
+            font-size: clamp(1.2rem,1.5vw,3rem);
+            font-weight: 500;
+            margin-bottom: 3vh;
+            text-align: center;
+        }
+        .form-input {
+            width: 100%;
+            padding: 1.5vh 1vw;
+            margin-bottom: 1.2vh;
+            background-color: #f0f0f0;
+            border: 0px;
+            color: #000;
+            border-radius: 4px;
+            font-size: clamp(1.5vh,1vw,1rem);
+        }
+        .popup-formCheckboxLabel {
+            font-size: clamp(0.7rem,0.9vw,1rem);
+        }
+        .popup-formSubmitBtn {
+            width: 100%;
+            margin: 2vh  0;
+            padding: 1.5vh 1vw;
+            color: #fff;
+            background-color: green;
+            border: 0;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .popup-rightDivider {
+            position: relative;
+            display: flex;
+            margin: 1vh 0;
+            align-items: center;
+            justify-content: space-around;
+            font-size: 400;
+        }
+        .popup-rightDivider::after,.popup-rightDivider::before {
+            display: block;
+            content: "";
+            width: 40%;
+            height: 0px;
+            color: #555;
+            border: 1px solid #cdcdcd;
+        }
+        .popup-IvrContainer {
+            display: flex;
+            gap: 2%;
+        }
+        .popup-callBtn {
+            flex: 0 0 48%;
+            padding: 1vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 40px;
+        }
+        .popup-freeSiteVisitImageContainer {
+            width: 100%;
+            text-align: center;
+        }
+        .popup-freeSiteVisitImage {
+            width:60%;
+            height: auto;
+        }
+        @media (max-width:768px) {
+            .popup-flexContainer {
+                flex-direction: column;
+                width: 90%;
+            }
+            .popup-leftContainer {
+                width: 100%;
+                border-radius: 10px 10px 0 0 ;
+                text-align: center;
+            }
+            .popup-leftDesktopContainer {
+                display: none;
+            }
+            .popup-rightContainer {
+                text-align: center;
+                width: 100%;
+            }
+        }
+    </style>
+    <style>
+    .circle-container {
+  width: 15vw;
+  height: 15vw;
+  border: 2px dashed #fff;      /* Dashed border */
+  border-radius: 50%;           /* Circle shape */
+  position: relative;           /* For positioning child images */
+  margin: 50px auto;             /* Center horizontally */
+  color: #fff;
+}
+.imgContainer1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(0.5rem,1vw,1rem);
+}
+.imgContainer2 {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    transform: translate(-50%,50%);
+    font-size: clamp(0.5rem,1vw,1rem);
+}
+.imgContainer3 {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    transform: translate(50%,50%);
+    font-size: clamp(0.5rem,1vw,1rem);
+}
+.circle-img {
+  width: 60px;                   /* Small image size */
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  border: 3px solid white;       /* Optional border around images */
+}
+
+/* Position images along the circle border */
+.img1 {
+
+  width: 5vw;
+  height: 5vw;
+}
+
+.popup-image {
+    position: relative;
+    transform: translateY(-50%);
+}
+
+</style>
+</head>
+<body>
+    <p>popup-close button pending</p>
+    <section>
+        <div class="popup-overlay"></div>
+        <div class="popup-flexContainer">
+            <div class="popup-leftContainer">
+                <h1 class="popup-leftHeading">Cander Skyline</h1>
+                <div class="popup-leftDesktopContainer">
+                <p class="popup-leftSubheading">Book Now to Avail Offers</p>
+                <ul class="popup-offerList">
+                    <li><span>✔</span><span>4 Tallest Towers with Glass facades</span></li>
+                    <li><span>✔</span><span>60,000 sq. ft. Amenities Space</span></li>
+                    <li><span>✔</span><span>Early Booking Offer</span></li>
+                </ul>
+                <div class="circle-container">
+                        <div class="imgContainer1">
+                            <div class="popup-image">
+                            <img src="assets/images/icons/client.webp" class=" img1" alt="Image 1" loading=lazy>
+                            <p>Get Instant call</p>
+                            </div>
+                        </div>
+
+                        <div class="imgContainer2">
+                            <div class="popup-image">
+                            <img src="assets/images/icons/sitevisit.webp" class=" img1" alt="Image 1" loading=lazy>
+                            <p>Free Site Visit</p>
+                            </div>
+                        </div>
+
+                        <div class="imgContainer3">
+                            <div class="popup-image">
+                            <img src="assets/images/icons/salary.webp" class=" img1" alt="Image 1" loading="lazy">
+                            <p>Unmatched Price</p>
+                            </div>
+                        </div>
+                </div>
+                <!-- <div class="popup-freeSiteVisitImageContainer">
+                <img src="assets/images/icons/image.webp" alt="Book Now to Avail Free Site Visit" loading="lazy" class="popup-freeSiteVisitImage">
+            </div> -->
+            </div>
+            
+            </div>
+            <div class="popup-rightContainer">
+                <h2 class="popup-rightHeading">Limited Time Offer!</h1>
+                <p class="popup-rightSubheading">Fill the form</p>
+                <form>
+                    <div class="popup-formContainer">
+                    <input type="text" placeholder="Enter Your Name" aria-label="Enter Your Name" class="form-input" required/>
+                    </div>
+                    <div class="popup-formContainer">
+                    <select required class="form-input" aria-label="Select Country Code">
+                        <option value="+91" selected>+91 (India)</option>
+                    </select>
+                    </div>
+                    <div class="popup-formContainer">
+                    <input type="text" placeholder="Enter Mobile Number" aria-label="Enter Mobile Number" class="form-input" required/>
+                    </div>
+                    <div class="popup-formContainer" style="display: flex;gap: 1vw;">
+                    <input type="checkbox"  id="popup-formCheckbox" required/>
+                    <label for="popup-formCheckbox" class="popup-formCheckboxLabel">I consent Privacy policy</label>
+                    </div>
+                    <button class="popup-formSubmitBtn">Submit</button>
+                </form>
+                <p class="popup-rightDivider">OR</p>
+                <div class="popup-IvrContainer">
+                    <button class="popup-callBtn" aria-label="Speak with Marketing Advisor" style="border: 1px solid #000;background-color: #fff;"><img src="assets/images/icons/phoneblack.gif" alt="Call Support" width="30" height="30" loading="lazy"><span>Call Now</span></button>
+                    <button class="popup-callBtn" aria-label="Chat with Marketing Advisor" style="border: 0;background-color: #4dcd5b;color: #fff;"><img src="assets/images/icons/whatsappIcon.gif" alt="Chat on" width="30" height="30" loading="lazy"><span>Whatsapp</span></button>
+                </div>
+            </div>
+        </div>
+
+       
+    </section>
+
+</body>
+</html>

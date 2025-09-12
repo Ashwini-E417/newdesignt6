@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floor and Price</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+        <!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    .floorprice-Container {
+        padding: 5vh 5vw;
+    }
+    .floorplan-flexContainer {
+        display: flex;
+        gap: 5%;
+    }
+    .floorplan-imgCarouselContainer {
+        flex: 0 0 45%;
+        overflow: hidden;
+        position: relative;
+    }
+    .pricePlanContainer {
+        flex: 0 0 50%;
+    }
+    .floorplanCarousel {
+        display: flex;
+        flex-direction: row;
+        transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .floorcard {
+        flex: 0 0 100%;
+        pointer-events: auto;
+        position: relative;
+    }
+    .floorClickBtn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background: #ffffffe6;
+        border: 1px solid var(--darkest);
+        color: var(--darkest);
+        padding: 2vh 2vw;
+        /* animation: float 1s ease-in-out infinite; */
+        opacity: 0;
+        transition: all 1s ease-in;
+        pointer-events: all;
+    }
+    .floorcard:hover .floorImg{
+        filter: blur(4px);
+    }
+    .floorcard:hover .floorClickBtn {
+        opacity: 1;
+    }
+    .floorImg {
+        pointer-events: none;
+    }
+    .floorplan-controlsContainer {
+        display: flex;
+        width: 100%;
+        position: absolute;
+        justify-content: space-between;
+        align-items: center;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+    .floor-controls {
+        /* transform: translateY(-50%); */
+        background: var(--darkest);
+        /* border: 1px solid #eee; */
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #fff;
+        transition: all 0.3s ease;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 2px 2px #aaa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: all;
+    }
+    .floorplan-next {
+        border-radius: 50% 0 0% 50%;
+        transform: translateX(25%);
+    }
+    .floorplan-prev {
+        border-radius: 0 50% 50% 0;
+        transform: translateX(-25%);
+    }
+    .floorplan-textOverlay {
+        text-align: center;
+    }
+    .pricerow {
+        display: flex;
+        gap: 5%;
+        width: 100%;
+        border-bottom: 1px solid #888;
+        justify-content: space-between;
+        padding: 2vh 0;
+    }
+    .pricerow:nth-child(1) {
+        border-bottom: 1px solid #000;
+    }
+    .pricetype{
+        flex: 0 0 30%;
+    }
+    .priceCarpet{
+        flex: 0 0 30%;
+    }
+    .pricevalue{
+        flex: 0 0 30%;
+    }
+    @media (max-width:768px) {
+        .floorplan-flexContainer {
+            flex-direction: column;
+        }
+        .floorplan-prev, .floorplan-next {
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+    }
+</style>
+</head>
+<body>
+    <section>
+    <div class="floorprice-Container">
+        <h2 class="section-headingCenter">Floor And Price Plan</h2>
+        <p class="section-subHeading">Explore Floor and price plan</p>
+        <div class="floorplan-flexContainer">
+            <div class="floorplan-imgCarouselContainer">
+                <div class="floorplanCarousel">
+                    <div class="floorcard">
+                        <img src="/assets/images/banner/banner.webp" alt="Floor Plan" loading="lazy" width="100%" height="90%" class="floorImg"/>
+                        <p class="floorplan-textOverlay">Master Plan</p>
+                        <button class="floorClickBtn">Download Plan</button>
+                    </div>
+                    <div class="floorcard">
+                        <img src="/assets/images/banner/banner.webp" alt="Floor Plan" loading="lazy" width="100%" height="90%" class="floorImg"/>
+                        <p class="floorplan-textOverlay">Floor Plan</p>
+                        <button class="floorClickBtn">Download Plan</button>
+                    </div>
+                </div>
+                <div class="floorplan-controlsContainer">
+                    <button class="floorplan-prev floor-controls" aria-label="View Previous Floor plan">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button class="floorplan-next floor-controls" aria-label="View Next Floor Plan">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="pricePlanContainer">
+                <div class="pricerow">
+                    <b class="pricetype">Typology</b>
+                    <b class="priceCarpet">Carpet Area</b>
+                    <b class="pricevalue">Price</b>
+                </div>
+                <div class="pricerow">
+                    <p class="pricetype">2 BHK</p>
+                    <p class="priceCarpet">850 Sq. FT</p>
+                    <p class="pricevalue">85 Onwards</p>
+                </div>
+                <div class="pricerow">
+                    <p class="pricetype">2 BHK Penthouse</p>
+                    <p class="priceCarpet">850 Sq. FT</p>
+                    <p class="pricevalue">85 Onwards</p>
+                </div>
+                <div class="pricerow">
+                    <p class="pricetype">2 BHK</p>
+                    <p class="priceCarpet">850 Sq. FT</p>
+                    <p class="pricevalue">85 Onwards</p>
+                </div>
+                <div class="downloadButtonContainer">
+                    <button class="downloadButton">Get Pricing Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+    <script>
+        const floorcardlength = document.querySelectorAll(".floorcard").length;
+        let floorIndex = 0;
+        let floortimer = setInterval(beginFloorCarousel,3000);
+
+        function beginFloorCarousel() {
+            floorIndex = (floorIndex + 1 ) % floorcardlength;
+            slidefloorCarousel();
+        }
+
+        document.querySelector(".floorplan-prev").addEventListener("click",(e)=>{
+            e.preventDefault();
+            floorIndex = (floorIndex + floorcardlength - 1) % floorcardlength ;
+            slidefloorCarousel();
+            resetfloortimer();
+        })
+
+        document.querySelector(".floorplan-next").addEventListener("click",(e)=>{
+            e.preventDefault();
+            floorIndex = (floorIndex + 1) % floorcardlength;
+            slidefloorCarousel();
+            resetfloortimer();
+        })
+
+        function slidefloorCarousel(){
+            document.querySelector(".floorplanCarousel").style.transform = `translateX(-${floorIndex*100}%)`;
+        }
+        function resetfloortimer() {
+            clearInterval(floortimer);
+            floortimer = setInterval(beginFloorCarousel,3000);
+        }
+
+        const track = document.querySelector(".floorplanCarousel"); // or main container
+let touchStartX = 0;
+let touchEndX = 0;
+
+// handle touch start
+track.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+// handle touch end
+track.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const swipeDistance = touchEndX - touchStartX;
+
+  // threshold to avoid accidental taps
+  if (Math.abs(swipeDistance) > 50) {
+    if (swipeDistance > 0) {
+      // swipe right → prev
+      floorIndex = (floorIndex + floorcardlength - 1) % floorcardlength;
+    } else {
+      // swipe left → next
+      floorIndex = (floorIndex + 1) % floorcardlength;
+    }
+
+    slidefloorCarousel();
+    resetfloortimer();
+  }
+}
+
+    </script>
+</body>
+</html>

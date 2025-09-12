@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-weight: 400;
+            box-sizing: border-box;
+            font-family: "Noto Sans",sans-serif;
+        }
+        a {
+            all: unset;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            color: #fff;
+        }
+        .navbar-logo {
+            width: 10vw;
+            height: auto;
+            margin-left: 4vw;
+        }
+        .menubar {
+            font-size: clamp(1vw,1.3vw,6rem);
+            cursor: pointer;
+            display: flex;
+            gap: 1vw;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-mobileWhatsapp {
+            display: flex;
+            gap: 1vw;
+            background-color: rgb(255,255,255,0.8);
+            padding: 0 4vw;
+            align-items: center;
+            color: #000;
+            clip-path: polygon(0 0%, 100% 0%, 100% 100%, 20% 100%, 0% 0%);
+            font-size: clamp(1vw,1.5vw,6rem);
+        }
+        .bannerTrack::before {
+            inset: 0;
+            content: "";
+            position: absolute;
+            clip-path: polygon(50vw 0vh, 0vw 0vh, 0vw 100%);
+            background-color: green;
+            opacity: 0.9;
+            z-index: 100;
+        }
+        .bannerTrack::after {
+            inset: 0;
+            content: "";
+            position: absolute;
+            clip-path: polygon(0vw 50vh, 0vw 100vh, 50vw 100%);
+            background-color: green;
+            opacity: 0.9;
+        }
+
+        .bannerImage {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+
+        .banner {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            flex-wrap: nowrap;
+            box-sizing: border-box;
+        }
+        .bannerImage {
+            width: 100%;
+        }
+        .bannerTrack {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .bannerCard {
+            width: 100%;
+            flex: 0 0 100%;
+            position: relative;
+        }
+        .banner-contentContainer {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            left: 5vw;
+            z-index: 1000;
+            text-shadow: 0 2px 2px rgba(0,0,0,0.6);
+        }
+        .banner-projectHeading {
+            font-size: clamp(2.5rem,5vw,7rem);
+            font-weight: 600;
+            
+        }
+        .banner-projectDeveloper {
+            font-size: clamp(1.2rem,2vw,4rem);
+            margin: 0 0 1vw 1vw;
+            font-weight: 600;
+        }
+        .banner-projectLocation {
+            font-size: clamp(1.2rem,1.5vw,4rem);
+            margin: 0 0 1vw 1vw;
+            font-weight: 600;
+            width: fit-content;
+            background-color: rgb(255,255,255,0.3);
+            padding: 1vh 1vw;
+            border-radius: 50px;
+        }
+        .banner-subHeading {
+            font-size: clamp(1rem,2vw,4rem);
+            margin: 5vh 0 0;
+        }
+        .banner-price {
+            display: block;
+        }
+        .banner-price strong {
+            font-weight: 600;
+            font-size: clamp(1.5rem,2.5vw,5rem);
+        }
+        .bannerEnquireBtn {
+            margin: 5vh 0 0;
+            padding: 2vh 2vw;
+            border: 0;
+            border-radius: 4px;
+            background-color: #fff;
+            color: green;
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            .navbar-logo {
+                width: 20vw;
+            }
+            .bannerImage {
+                height: 30vh;
+            }
+
+            .bannerTrack::after,.bannerTrack::before{
+                display: none;
+            }
+            header {
+                background-color: green;
+            }
+            .menubar {
+                display: none;
+            }
+
+            .banner-contentContainer {
+                position: relative;
+                transform: translate(0);
+                color: #000;
+                text-shadow: none;
+                left: 0;
+                /* padding: 1vh 2vw; */
+                text-align: center;
+            }
+            .bannerEnquireBtn {
+                background-color: green;
+                color: #fff;
+                padding: 1vh 2vw;
+                margin: 2vh 0 0;
+            }
+            .banner-projectLocation {
+                background-color: transparent;
+                margin: 0 auto;
+            }
+            .banner-projectHeading {
+                background-color: green;
+                margin: -1vh 0 1vh 0;
+                color: #fff;
+                padding: 1vh 0;
+            }
+            .banner-subHeading {
+                margin: 2vh 0 0;
+            }
+            .banner-projectDeveloper {
+                margin: 0;
+
+            }
+            
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+            <img src="assets/images/logo/logo.webp" alt="Logo" class="navbar-logo"> 
+            <span class="menubar" role="menu">
+                <a href="" title="" aria-label="" role="menuitem">Overview</a>
+                <a href="" title="" aria-label="" role="menuitem">Price</a>
+                <a href="" title="" aria-label="" role="menuitem">Floor Plan</a>
+                <a href="" title="" aria-label="" role="menuitem">Amenities</a>
+                <a href="" title="" aria-label="" role="menuitem">Gallery</a>
+                <a href="" title="" aria-label="" role="menuitem">Location</a>
+                <a href="" title="" aria-label="" role="menuitem">Virtual Tour</a>
+                <a href="" title="" aria-label="" role="menuitem">Brochure</a>
+            </span>
+            <span class="nav-mobileWhatsapp" role="menu">
+                <a href="" title="" aria-label="" role="menuitem">+1234567890</a>
+                <a href="" title="" aria-label="" role="menuitem">Whatsapp</a>
+            </span>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class=bannerTrack>
+                <div class=banner>
+                    <div class=bannerCard>
+                        <img src=assets/images/banner/banner.webp srcset="assets/images/banner/banner-480.webp 480w, assets/images/banner/banner.webp 1280w" sizes="(max-width: 600px) 480px, 1280px" alt="Modern Office Building" width=1280 height=720 fetchpriority=high loading=eager decoding=async class=bannerImage>
+                    </div>
+                    <div class=bannerCard>
+                        <img src=assets/images/banner/banner2.webp srcset="assets/images/banner/banner2-480.webp 480w, assets/images/banner/banner2.webp 1280w" sizes="(max-width: 600px) 480px, 1280px" alt="Modern Office Building" width=1280 height=720 fetchpriority=high loading=eager decoding=async class=bannerImage>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="banner-contentContainer">
+            <h1 class="banner-projectHeading">Candeur Skyline</h1>
+            <p class="banner-projectDeveloper">By Candeur Skyline</p>
+            <p class="banner-projectLocation">At Finanical District, Hyderabad</p>
+            <p class="banner-subHeading">Luxurious 4 BHK Apartments & Sky Villas Starts <span class="banner-price">₹ <strong>9 Cr*</strong> Onwards</span></p>
+            <button class="bannerEnquireBtn" aria-label="Enquire More about Candeur Skyline">Enquire Now</button>
+        </section>
+    </main>
+
+
+
+    <script>
+        setInterval(updateBannerCorousel,3000);
+
+let bannerImage = document.querySelectorAll(".bannerImage");
+let bannerContainer = document.querySelector(".banner");
+let bannertransform = 0;
+let bannercount = 0;
+function updateBannerCorousel() {
+    bannerContainer.style.transform =  `translateX(-${bannercount*100}%)`;
+    bannercount+=1;
+    if (bannercount>bannerImage.length-1){
+        bannercount=0;
+    }
+}
+    </script>
+</body>
+</html>

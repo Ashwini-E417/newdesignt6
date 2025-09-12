@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    .about-sectionContainer {
+        padding: 5vh 5vw;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+    .about-sectionHeading {
+        font-size: clamp(1.7rem, 2.5vw, 4rem);
+    }
+    /* .about-leftContainer {
+        border: 1px solid #000;
+    }
+    .about-rightContainer {
+        border: 1px solid #000;
+    } */
+    .aboutDeveloper-description {
+        font-size: clamp(1rem, 1.2vw, 1.1rem);
+        line-height: 1.8;
+        color: #000;
+        margin-bottom: 2rem;
+    }
+    .about-formContainer {
+        border-radius: 4px;
+        text-align: center;
+        background-color: #f0f0f0;
+        height: 100%;
+        padding: 3vh 1vw;
+        /* border: 1px solid #000; */
+    }
+    .about-formHeading {
+        font-size: clamp(1.5rem, 5vh, 2rem);
+        color: var(--seconddark);
+    }
+    .about-formSubheading {
+        font-size: clamp(1rem,4vh,1.5rem);
+        margin-bottom: 2rem;
+    }
+    .input-group2 {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1vh;
+    }
+    .input-box {
+        width: 100%;
+        padding: 2vh 2vw;
+        border-radius: 4px;
+        margin-bottom: 1vh;
+        border: 1px solid var(--secondlight);
+        font-size: clamp(1rem,2vh,3rem);
+    }
+    .input-box:focus {
+        outline: 1px solid var(--mediumlight);
+    }
+    .consent-checkbox1 {
+        font-size: 1.5vh;
+        color: #555;
+    }
+    .consent-checkbox1 a {
+        color: rgb(17, 99, 250);
+        text-decoration: underline;
+    }
+    .about-submitBtn {
+        background-color: var(--firstlight);
+        color: var(--darkest);
+        border: 0;
+        padding: 2vh 5vw;
+        margin: 1rem 0 0.5rem;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .about-submitBtn:hover {
+        border: 1px solid var(--mediumlight);
+        transform: translateY(-2px);
+        box-shadow: 2px 2px 2px var(--firstlight);
+    }
+    @media (max-width:1024px) {
+        .about-sectionContainer {
+            grid-template-columns: 1fr 1fr;
+            gap: 2vh;
+        }
+    }
+    @media (max-width: 550px) {
+        .about-sectionContainer {
+            grid-template-columns: 1fr;
+            gap: 2vh;
+        }
+        .about-formContainer {
+            background-color: transparent;
+            padding: 0;
+        }
+    }
+</style>
+
+<style>
+    #footer{padding: 5vh 5vw;background-color: #eee;}
+    .footer-qr-section{display:flex;justify-content:space-around}
+    .footer-qr-image{width:100px;height:100px}
+    .footer-rera-info{padding:10px 0}
+    .footer-rera-link{color:#00f}
+    .footer-rera-item{display:flex;gap:10px}
+    .footer-links-container{text-align:center;margin-top:1.5rem;font-size:14px}
+    @media (max-width:768px)
+    {
+        #footer{padding-bottom:4rem}
+    }
+</style>
+</head>
+<body>
+    <section>
+        <div class="about-sectionContainer">
+            <div class="about-leftContainer">
+                <h2 class="section-headingCenter about-sectionHeading">About Developer</h2>
+                <p class="section-subHeading"></p>
+                <p class="aboutDeveloper-description">
+                    Candeur Constructions, one of India's top property developers, prioritises meeting customer needs and delivering high-quality projects within budget and on schedule. The company has completed two residential projects - Candeur Carlisle in Mahadevpura and Candeur Rise in Varthur, East Bangalore. It plans to launch additional projects that contribute to the development of residential and mixed-use real estate in Bangalore. Candeur Constructions maintains quality objectives and has established quality assurance systems to monitor progress. Additionally, every project by Candeur Constructions upholds the highest standards of quality and excellence, making the builder a popular choice among buyers.
+                </p>
+            </div>
+            <div class="about-rightContainer">
+                <div class="about-formContainer">
+                    <h3 class="about-formHeading">Still Got Questions?</h3>
+                    <p class="about-formSubheading">Let us help you Answer it</p>
+                    <form>
+                        <div class="input-group">
+                            <input type="text" name="name" class="input-box" placeholder="Enter Your Name" required autocomplete="name" />
+                        </div>
+                        <div class="input-group">
+                            <select name="Country-Code" aria-label="Enter Country Code" class="input-box" required>
+                                <option value="+91" selected>India (+91)</option>
+                                <option data-countryCode=DZ value=213>Algeria (+213)</option>
+                                <option data-countryCode=AD value=376>Andorra (+376)</option>
+                                <option data-countryCode=AO value=244>Angola (+244)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="number" class="input-box" placeholder="Enter Mobile Number" required autocomplete="mobile" />
+                        </div>
+                        <div class="input-group input-group2">
+                            <input type="checkbox" id="consent-checkbox1" required checked>
+                            <label for="consent-checkbox1" class="consent-checkbox1">I consent to the use of provided data in accordance with the <a
+                                    href="https://www.homesfy.co.in/privacy.html" target="_blank" rel="noopner noreferer">privacy
+                                    policy</a></label>
+                        </div>
+                        <input type="submit" value="Submit" class="about-submitBtn">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class=section-container role=contentinfo aria-label=Footer id=footer>
+<div class=footer-qr-section>
+<div class=footer-qr-item>
+<img src="/assets/images/qr/qr.webp" alt="QR code for prestige" class=footer-qr-image loading=lazy>
+<p class=footer-rera-number>P51700046312</p>
+</div>
+<div class=footer-qr-item>
+<img src="assets/images/qr/qr.webp" alt="QR code for prestige" class=footer-qr-image loading=lazy>
+<p class=footer-rera-number>P51700046312</p>
+</div>
+<div class=footer-qr-item>
+<img src=/assets/images/qr/qr.webp alt="QR code for prestige" class=footer-qr-image loading=lazy>
+<p class=footer-rera-number>P51700046312</p>
+</div>
+</div>
+<br>
+<div class=footer-rera-info>
+<div class=footer-rera-item>
+<span class=footer-rera-checkmark aria-hidden=true>✔</span>
+<span class=footer-rera-text>
+Project registered under Government of India RERA Act 2016 |
+<a href=http://www.maharera.maharashtra.gov.in target=_blank rel="noopener noreferrer" class=footer-rera-link role=link>
+www.maharera.maharashtra.gov.in
+</a>
+</span>
+</div>
+<div class=footer-rera-item>
+<span class=footer-rera-checkmark aria-hidden=true>✔</span>
+<span class=footer-rera-text>
+Government RERA Authorised Advertiser: Homesfy Realty Ltd, Registration No - A51900000136
+</span>
+</div>
+<div class=footer-rera-item>
+<span class=footer-rera-checkmark aria-hidden=true>✔</span>
+<span class=footer-rera-text>
+Project RERA: P51700046312
+</span>
+</div>
+</div>
+<br>
+<div>
+<p class=footer-disclaimer-text>
+<strong>Disclaimer: </strong> We're an authorized marketing channel partner (Homesfy Realty Ltd). The provided content, images & video are sourced from respective owners and are provided only for information purposes, it does not constitute an offer to buy any service. The price plans are subject to change without prior notice, and the properties mentioned are subject to availability. You can receive a call, SMS, or emails on contact details registered with us.
+</p>
+</div>
+<div class=footer-links-container>
+&copy; Copyright
+<span class=footer-separator>|</span>
+<a href=https://www.homesfy.co.in/privacy.html target=_blank rel="noopener noreferrer" class=footer-rera-link role=link>Privacy Policy</a>
+<span class=footer-separator>|</span>
+<a href=https://www.homesfy.co.in/terms.html target=_blank rel="noopener noreferrer" class=footer-rera-link role=link>Terms & Conditions</a>
+</div>
+</footer>
+</body>
+</html>
