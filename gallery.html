@@ -25,17 +25,152 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+      .gallery-container {
+        padding: 5vh 5vw;
+      }
      
       .galleryImageContainer {
         display: grid;
-        grid-template-columns: 75% 25%;
+        grid-template-columns: auto auto auto;
         gap: 10px;
-        background-color: dodgerblue;
+        /* background-color: dodgerblue; */
         padding: 10px;
         width: 100%;
       }
-      .galleryImage:nth-child(1) {
+      .gallery-imageWrapper {
+        display: none;
+        position: relative;
+        height: 20vh;
+      }
+      .galleryImage {
+        width: 100%;
+        height: 100%;
+        display: block;
+        cursor: pointer;
+        object-fit: cover;
+      }
+      .gallery-imageWrapper:nth-child(1) {
         grid-column: 1 / span 2;
+        grid-row: 1 /span 2 ;
+        display: block;
+        height: 41.5vh;
+      }
+      .gallery-imageWrapper:nth-child(n+2):nth-child(-n+6) {
+        display: block;
+      }
+      .galleryOverlay {
+        background-color: rgb(0,0,0,0.7);
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+      .gallery-moreMsg {
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+      .gallery-lightboxContainer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(0,0,0,0.7);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        display: none;
+      }
+      .gallery-lightboxContainer {
+        width: 75%;
+        height: 75%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+      .gallery-lightbox-Imageholder {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 100;
+      }
+      .gallery-lightbox-Imageholder.galleryImageHide {
+        display: none;
+      }
+      .gallery-lightbox-close {
+        position: absolute;
+        top: 40px;
+        right: 20px;
+      }
+      .gallery-lightbox-left {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+      }
+      .gallery-lightbox-right {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+      }
+      .gallery-lightbox-controls {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(0,0,0,0.3);
+        color: #fff;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+      }
+      .gallery-lightbox-text {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        /* background-color: red; */
+        color: white;
+        transform: translate(-50%,-50%);
+        text-align: center;
+      }
+      .gallery-lightbox-text p {
+        font-size: clamp(1.5rem, 4vh, 2.5rem);
+      }
+      .gallery-lightbox-button {
+        color: #000;
+        background: #fff;
+        margin: 3vh 0;
+        padding: 12px 24px;
+        border-radius: 4px;
+      }
+      .gallery-lightBoxIndicator {
+        text-align: center;
+        color: #fff;
+      }
+      @media (min-height:650px) {
+        .gallery-lightboxContainer {
+          height: 50%;
+        }
+        .gallery-imageWrapper:nth-child(1) {
+          height: 49vh;
+        }
+        .gallery-imageWrapper {
+          height: 24vh;
+        }
+      }
+      @media (max-width:768px) {
+        .gallery-lightboxContainer {
+          width: 90%;
+        }
       }
 
     </style>
@@ -43,22 +178,189 @@
 <body>
     
   <section>
-    <div class="gallery-container">
+    <div class="gallery-container" >
       <h2 class="section-headingCenter">Gallery</h2>
-      <p class="section-subHeading">See it to belive it</p>
       <div class="galleryImageContainer">
-        <img src="assets/images/gallery/g1.webp" alt="g1" loading="lazy" class="galleryImage" />
-        <img src="assets/images/gallery/g2.webp" alt="g1" loading="lazy" class="galleryImage" />
-        <img src="assets/images/gallery/g3.webp" alt="g1" loading="lazy" class="galleryImage" />
-        <img src="assets/images/gallery/g4.webp" alt="g1" loading="lazy" class="galleryImage" />
-        <img src="assets/images/gallery/g5.webp" alt="g1" loading="lazy" class="galleryImage" />
-        <img src="assets/images/gallery/g6.webp" alt="g1" loading="lazy" class="galleryImage" />
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g1.webp" alt="g1"  class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g2.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g3.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g4.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g5.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g6.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g1.webp" alt="g4" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g6.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g1.webp" alt="g4" loading="lazy" class="galleryImage" /></div>
+      </div>
+
+      <div class="downloadButtonContainer">
+        <button class="downloadButton">Download Gallery</button>
+      </div>
+    </div>
+
+    <div class="gallery-lightboxContainer-overlay">
+      <div class="gallery-lightboxContainer">
+        <div class="gallery-lightbox-text">
+          <p>Need More Images</p>
+          <button class="gallery-lightbox-button">Download Now</button>
+        </div>
+
+        <button class="gallery-lightbox-close gallery-lightbox-controls" aria-label="Close Gallery Preview"><i class="fa fa-close" aria-hidden="true"></i></button>
+        <button class="gallery-lightbox-left gallery-lightbox-controls" aria-label="View Previous Gallery Image"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+        <button class="gallery-lightbox-right gallery-lightbox-controls" aria-label="View Next Gallery Image"><i class="fa fa-chevron-right"></i></button>
+        <img src="/assets/images/gallery/g1.webp" alt="" class="gallery-lightbox-Imageholder" loading="lazy">
+        <div class="gallery-lightBoxIndicator">1/7</div>
+        
       </div>
     </div>
   </section>
 
     <script>
-       
+       document.addEventListener("DOMContentLoaded",()=>{
+        const galleryImages = document.querySelectorAll(".galleryImage");
+        const galleryLightboxContainer = document.querySelector(".gallery-lightboxContainer-overlay");
+        const galleryImageHolder = document.querySelector(".gallery-lightbox-Imageholder");
+        const galleryLightboxIndicator = document.querySelector(".gallery-lightBoxIndicator");
+        const body = document.querySelector('body');
+        let galleryIndex = 0;
+        const gallerycount = galleryImages.length + 1;
+
+        if(galleryImages.length>6){
+          const overlay = document.createElement("div");
+          overlay.className = "galleryOverlay";
+          galleryImages[5].addEventListener("load",()=>{
+            overlay.style.width = galleryImages[5].clientWidth + "px";
+            overlay.style.height = galleryImages[5].clientHeight + "px";
+          })
+          document.querySelectorAll(".gallery-imageWrapper")[5].appendChild(overlay);
+
+
+          const galleryMoreMsg = document.createElement("div");
+          galleryMoreMsg.className = "gallery-moreMsg";
+          galleryMoreMsg.innerHTML = "+"+ (gallerycount-7)+" more";
+          galleryImages[5].addEventListener("load",()=>{
+            galleryMoreMsg.style.height = galleryImages[5].clientHeight + "px";
+            galleryMoreMsg.style.width = galleryImages[5].clientWidth + "px";
+          })
+          document.querySelectorAll(".gallery-imageWrapper")[5].appendChild(galleryMoreMsg);
+
+
+          window.addEventListener("resize",(e)=>{
+            e.preventDefault();
+            document.querySelector(".galleryOverlay").style.width = galleryImages[5].clientWidth + "px";
+            document.querySelector(".galleryOverlay").style.height = galleryImages[5].clientHeight + "px";
+
+
+            document.querySelector(".gallery-moreMsg").style.width = galleryImages[5].clientWidth + "px";
+            document.querySelector(".gallery-moreMsg").style.height = galleryImages[5].clientHeight + "px";
+          })
+          
+        }
+
+        galleryImages.forEach((element,index)=>{
+          element.addEventListener("click",(e)=>{
+            e.preventDefault();
+            galleryIndex = index;
+            galleryLightboxImageChange();
+            galleryLightboxContainer.style.display = "block";
+            body.style.overflowY = "hidden";
+            document.addEventListener("keydown",galleryKeyHandler)
+          })
+        });
+
+        function galleryLightboxPrev() {
+          galleryIndex = (galleryIndex - 1 + gallerycount) % gallerycount;
+          galleryLightboxImageChange();
+          console.log(galleryIndex);
+        }
+
+        function galleryLightboxNext() {
+          galleryIndex = (galleryIndex + 1) % gallerycount;
+          galleryLightboxImageChange();
+          console.log(galleryIndex);
+        }
+
+        function galleryLightboxClose() {
+          galleryLightboxContainer.style.display = "none";
+          body.style.overflowY = "visible";
+          document.removeEventListener("keydown",galleryKeyHandler);
+        }
+
+        document.querySelector(".gallery-lightbox-close").addEventListener("click",(e)=>{
+          e.preventDefault();
+          galleryLightboxClose();
+        })
+
+        document.querySelector(".gallery-lightbox-left").addEventListener("click",(e)=>{
+          e.preventDefault();
+          galleryLightboxPrev();
+        });
+
+        document.querySelector(".gallery-lightbox-right").addEventListener("click",(e)=>{
+          e.preventDefault();
+          galleryLightboxNext();
+        });
+
+        function galleryLightboxImageChange () {
+          if (galleryIndex == galleryImages.length) {
+            galleryImageHolder.classList.add("galleryImageHide");
+            galleryLightboxIndicator.innerHTML = "";
+          }
+          else {
+            galleryImageHolder.classList.remove("galleryImageHide");
+            galleryImageHolder.src = galleryImages[galleryIndex].src;
+            galleryLightboxIndicator.innerHTML = (galleryIndex + 1) + " / " + (gallerycount - 1) ;
+          }
+        }
+
+
+        function galleryKeyHandler(e) {
+          console.log(e.key);
+          if (e.key=="ArrowLeft") {
+            galleryLightboxPrev();
+          }
+          else if (e.key=="ArrowRight") {
+            galleryLightboxNext();
+          }
+          else if (e.key=="Escape") {
+            galleryLightboxClose();
+          }
+        }
+
+        galleryLightboxContainer.addEventListener("click",(e)=>{
+          e.preventDefault();
+          if (e.target == galleryLightboxContainer) {
+            galleryLightboxClose();
+          }
+        })
+        let galleryStartX = 0;
+        galleryLightboxContainer.addEventListener("touchstart",(e)=>{
+          
+          galleryStartX = e.touches[0].clientX;
+        },{passive:true})
+
+        galleryLightboxContainer.addEventListener("touchend",(e)=>{
+          
+          const galleryEndX = e.changedTouches[0].clientX;
+          if (galleryEndX < galleryStartX - 50){
+            galleryLightboxPrev();
+          }
+          else if (galleryEndX > galleryStartX + 50) {
+            galleryLightboxNext();
+          }
+        },{passive:true})
+       })  //document.domcontentload close
+
+
     </script>
+
 </body>
 </html>
