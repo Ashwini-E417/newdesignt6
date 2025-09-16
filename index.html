@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css" >
+    <link rel="stylesheet" href="assets/css/main.css">
+            <!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+
+</head>
+<body>
+
+
+    <!-- Amenities -->
+     <section>
+        <div class="amenities-container">
+        <h1 class="section-headingCenter">Amenities</h1>
+        <p class="section-subHeading">Explore Premium lifestyle</p>
+        <div class="amenities-wrapper">
+        
+
+            <div class="amenities-track" id="amenitiesTrack">
+                <!-- Only original images (no duplicates) -->
+                <div class="amenities-slide">
+                    <div class="amenities-imageContainer">
+                    <img class="amenities-image" src="/assets/images/amenities/g1.webp" alt="Swimming Pool" loading="lazy">
+                    <div class="amenities-text-overlay">Infinity Pool</div>
+                    </div>
+                </div>
+                <div class="amenities-slide">
+                    <div class="amenities-imageContainer">
+                    <img class="amenities-image" src="/assets/images/amenities/g2.webp" alt="Fitness Center" loading="lazy">
+                    <div class="amenities-text-overlay">Fitness Center</div>
+                    </div>
+                </div>
+                <div class="amenities-slide">
+                    <div class="amenities-imageContainer">
+                    <img class="amenities-image" src="/assets/images/amenities/g3.webp" alt="Garden Area" loading="lazy">
+                    <div class="amenities-text-overlay">Zen Garden</div>
+                    </div>
+                </div>
+                <div class="amenities-slide">
+                    <div class="amenities-imageContainer">
+                    <img class="amenities-image" src="/assets/images/amenities/g4.webp" alt="Conference Room" loading="lazy">
+                    <div class="amenities-text-overlay">Conference Hall</div>
+                    </div>
+                </div>
+                <div class="amenities-slide">
+                    <div class="amenities-imageContainer">
+                    <img class="amenities-image" src="/assets/images/amenities/g5.webp" alt="Lounge Space" loading="lazy">
+                    <div class="amenities-text-overlay">Executive Lounge</div>
+                    </div>
+                </div>
+                <div class="amenities-slide">
+                    <div class="amenities-imageContainer">
+                    <img class="amenities-image" src="/assets/images/amenities/g6.webp" alt="Outdoor Deck" loading="lazy">
+                    <div class="amenities-text-overlay">Sky Deck</div>
+                    </div>
+                </div>
+                <div class="amenities-slide">
+                    <div class="amenities-imageContainer">
+                    <img class="amenities-image" src="/assets/images/amenities/g7.webp" alt="Outdoor Deck" loading="lazy">
+                    <div class="amenities-text-overlay">Sky Deck</div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="amenitiesControlContainer">
+        <button class="amenities-controls amenities-prev" id="amenitiesPrev" aria-label="View Previous Amenities Image">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <button class="amenities-controls amenities-next" id="amenitiesNext" aria-label="View Next Amenities Image">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            </div>
+
+            <div class="downloadButtonContainer">
+                <button class="downloadButton" aria-label="Download All Amenities">Download Amenities</button>
+            </div>
+        
+        <!-- <div class="amenities-navigation" id="amenitiesDots">
+            Dots will be dynamically created
+        </div> -->
+    </div>
+
+    <div class="amenities-lightbox" id="amenitiesLightbox">
+        <div class="amenities-lightbox-content">
+            <button class="amenities-lightbox-close" id="amenitiesLightboxClose" aria-label="Close Amenities Preview">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="amenities-lightbox-nav amenities-lightbox-prev" id="amenitiesLightboxPrev" aria-label="View Previous Amenities">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <img class="amenities-lightbox-image" id="amenitiesLightboxImage" src="" alt="" loading="lazy">
+            <button class="amenities-lightbox-nav amenities-lightbox-next" id="amenitiesLightboxNext" aria-label="View Next Amenities">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="amenities-lightbox-title" id="amenitiesLightboxTitle"></div>
+            <div class="amenities-lightbox-counter" id="amenitiesLightboxCounter">1 / 6</div>
+        </div>
+    </div>
+     </section>
+    
+
+     <!-- Gallery -->
+      <section>
+    <div class="gallery-container" >
+      <h2 class="section-headingCenter">Gallery</h2>
+      <div class="galleryImageContainer">
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g1.webp" alt="g1"  class="galleryImage" loading="lazy"/></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g2.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g3.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g4.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g5.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g6.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g1.webp" alt="g4" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g6.webp" alt="g1" loading="lazy" class="galleryImage" /></div>
+        <div class="gallery-imageWrapper">
+        <img src="assets/images/gallery/g1.webp" alt="g4" loading="lazy" class="galleryImage" /></div>
+      </div>
+
+      <div class="downloadButtonContainer">
+        <button class="downloadButton">Download Gallery</button>
+      </div>
+    </div>
+
+    <div class="gallery-lightboxContainer-overlay">
+      <div class="gallery-lightboxContainer">
+        <div class="gallery-lightbox-text">
+          <p>Need More Images</p>
+          <button class="gallery-lightbox-button">Download Now</button>
+        </div>
+
+        <button class="gallery-lightbox-close gallery-lightbox-controls" aria-label="Close Gallery Preview"><i class="fa fa-close" aria-hidden="true"></i></button>
+        <button class="gallery-lightbox-left gallery-lightbox-controls" aria-label="View Previous Gallery Image"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+        <button class="gallery-lightbox-right gallery-lightbox-controls" aria-label="View Next Gallery Image"><i class="fa fa-chevron-right"></i></button>
+        <img src="/assets/images/gallery/g1.webp" alt="" class="gallery-lightbox-Imageholder" loading="lazy">
+        <div class="gallery-lightBoxIndicator">1/7</div>
+        
+      </div>
+    </div>
+  </section>
+
+    <!-- Location -->
+     <section>
+        <div class="location-wrapper">
+            <h2 class="section-headingCenter">Location Advantages</h2>
+            <div class="toogle-buttonWrapper">
+                <button class="map-button">Map</button>
+                <div class="mapButton-divider"></div>
+                <button class="map-button mapButton-active">Connectivity</button>
+            </div>
+
+            <div class="mapAccordion-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2869.492024637345!2d72.9892725!3d19.2332529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bbbcd4f20c15%3A0x4c36bff2609ee7cf!2sLodha%20Amara%20Thane!5e1!3m2!1sen!2sin!4v1751889832611!5m2!1sen!2sin" width=100% height=350 style=border:0;display:block; allowfullscreen loading=lazy title="Lodha Amara Location Map" referrerpolicy=no-referrer-when-downgrade loading="lazy"></iframe>
+            </div>
+
+            <div class="mapAccordion-container mapAccordionContainer-active">
+            <div class="AccordionGridContainer">
+                <div class=map-connectivity-section>
+                    <div class=map-connectivity-header>
+                        <span class="map-connectivity-count">1</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore showhide">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content map-active connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+                <div class=map-connectivity-section>
+                    <div class=map-connectivity-header>
+                        <span class="map-connectivity-count">2</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+                <div class=map-connectivity-section>
+                    <div class=map-connectivity-header>
+                        <span class="map-connectivity-count">3</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+                 <div class=map-connectivity-section>
+                    <div class=map-connectivity-header >
+                        <span class="map-connectivity-count">4</span>
+                        <h3 class=map-connectivity-title>Connectivity</h3>
+                            <!-- <span class="map-connectivity-arrow connectivityArrow">▼</span> -->
+                    </div>
+                    <div class="map-connectivity-showmore">Show details <i class="fa fa-square-arrow-up-right map-connectivity-arrow"></i></div>
+                    <div class="map-connectivity-content connectivityContent">
+
+                            <div class=map-connectivity-items>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+
+                            <div class=map-advantage-item>
+                            <div class=map-advantage-text>Kempegowda International Airport</div>
+                            <div class=map-advantage-number>12 mins</div>
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+            <div class="downloadButtonContainer">
+                <button class="downloadButton">Enquire Now</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About -->
+     <section>
+        <div class="about-sectionContainer">
+            <div class="about-leftContainer">
+                <h2 class="section-headingCenter about-sectionHeading">About Developer</h2>
+                <p class="section-subHeading"></p>
+                <p class="aboutDeveloper-description">
+                    Candeur Constructions, one of India's top property developers, prioritises meeting customer needs and delivering high-quality projects within budget and on schedule. The company has completed two residential projects - Candeur Carlisle in Mahadevpura and Candeur Rise in Varthur, East Bangalore. It plans to launch additional projects that contribute to the development of residential and mixed-use real estate in Bangalore. Candeur Constructions maintains quality objectives and has established quality assurance systems to monitor progress. Additionally, every project by Candeur Constructions upholds the highest standards of quality and excellence, making the builder a popular choice among buyers.
+                </p>
+            </div>
+            <div class="about-rightContainer">
+                <div class="about-formContainer">
+                    <h3 class="about-formHeading">Still Got Questions?</h3>
+                    <p class="about-formSubheading">Let us help you Answer it</p>
+                    <form>
+                        <div class="input-group">
+                            <input type="text" name="name" class="input-box" placeholder="Enter Your Name" required autocomplete="name" />
+                        </div>
+                        <div class="input-group">
+                            <select name="Country-Code" aria-label="Enter Country Code" class="input-box" required>
+                                <option value="+91" selected>India (+91)</option>
+                                <option data-countryCode=DZ value=213>Algeria (+213)</option>
+                                <option data-countryCode=AD value=376>Andorra (+376)</option>
+                                <option data-countryCode=AO value=244>Angola (+244)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="number" class="input-box" placeholder="Enter Mobile Number" required autocomplete="mobile" />
+                        </div>
+                        <div class="input-group input-group2">
+                            <input type="checkbox" id="consent-checkbox1" required checked>
+                            <label for="consent-checkbox1" class="consent-checkbox1">I consent to the use of provided data in accordance with the <a
+                                    href="https://www.homesfy.co.in/privacy.html" target="_blank" rel="noopner noreferer">privacy
+                                    policy</a></label>
+                        </div>
+                        <input type="submit" value="Submit" class="about-submitBtn">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer class=section-container role=contentinfo aria-label=Footer id=footer>
+<div class=footer-qr-section>
+<div class=footer-qr-item>
+<img src="/assets/images/qr/qr.webp" alt="QR code for prestige" class=footer-qr-image loading=lazy>
+<p class=footer-rera-number>P51700046312</p>
+</div>
+<div class=footer-qr-item>
+<img src="assets/images/qr/qr.webp" alt="QR code for prestige" class=footer-qr-image loading=lazy>
+<p class=footer-rera-number>P51700046312</p>
+</div>
+<div class=footer-qr-item>
+<img src=/assets/images/qr/qr.webp alt="QR code for prestige" class=footer-qr-image loading=lazy>
+<p class=footer-rera-number>P51700046312</p>
+</div>
+</div>
+<br>
+<div class=footer-rera-info>
+<div class=footer-rera-item>
+<span class=footer-rera-checkmark aria-hidden=true>✔</span>
+<span class=footer-rera-text>
+Project registered under Government of India RERA Act 2016 |
+<a href=http://www.maharera.maharashtra.gov.in target=_blank rel="noopener noreferrer" class=footer-rera-link role=link>
+www.maharera.maharashtra.gov.in
+</a>
+</span>
+</div>
+<div class=footer-rera-item>
+<span class=footer-rera-checkmark aria-hidden=true>✔</span>
+<span class=footer-rera-text>
+Government RERA Authorised Advertiser: Homesfy Realty Ltd, Registration No - A51900000136
+</span>
+</div>
+<div class=footer-rera-item>
+<span class=footer-rera-checkmark aria-hidden=true>✔</span>
+<span class=footer-rera-text>
+Project RERA: P51700046312
+</span>
+</div>
+</div>
+<br>
+<div>
+<p class=footer-disclaimer-text>
+<strong>Disclaimer: </strong> We're an authorized marketing channel partner (Homesfy Realty Ltd). The provided content, images & video are sourced from respective owners and are provided only for information purposes, it does not constitute an offer to buy any service. The price plans are subject to change without prior notice, and the properties mentioned are subject to availability. You can receive a call, SMS, or emails on contact details registered with us.
+</p>
+</div>
+<div class=footer-links-container>
+&copy; Copyright
+<span class=footer-separator>|</span>
+<a href=https://www.homesfy.co.in/privacy.html target=_blank rel="noopener noreferrer" class=footer-rera-link role=link>Privacy Policy</a>
+<span class=footer-separator>|</span>
+<a href=https://www.homesfy.co.in/terms.html target=_blank rel="noopener noreferrer" class=footer-rera-link role=link>Terms & Conditions</a>
+</div>
+</footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

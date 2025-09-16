@@ -1,537 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite Amenities Carousel with Lightbox</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    //location js
+    //-----------------------------------------------------------------------------------
+    //****************************************************************************** */
+    //----------------------------------------------------------------------------------
+        const mapButton = document.querySelectorAll(".map-button");
+        const mapAccordionContainer = document.querySelectorAll(".mapAccordion-container");
+        mapButton.forEach((element,index) => {
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                
+                if(element.classList.contains("mapButton-active")){
+                    return;
+                }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+                element.classList.add("mapButton-active");
+                mapAccordionContainer[index].classList.add("mapAccordionContainer-active");
 
-        body {
-            font-family: "Noto Sans",sans-serif;;
-            /* background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); */
-            /* min-height: 100vh; */
-            /* display: flex;
-            align-items: center;
-            justify-content: center; */
-            /* padding: 20px; */
-        }
+                const i = (index + 1) % mapButton.length;
+                mapButton[i].classList.remove("mapButton-active");
+                mapAccordionContainer[i].classList.remove("mapAccordionContainer-active");
+            })
+        });
 
-        .amenities-container {
-            width: 100%;
-            /* max-width: 1200px; */
-            text-align: center;
-            padding: 5vh 5vw;
-            /* background-color: var(--secondlight); */
-            position: relative;
-        }
-        
-        .section-headingCenter {
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            font-weight: 700;
-            background: var(--darkest);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: .5rem;
-            position: relative;
-            text-align: center;
-        }
-        .section-subHeading {
-            font-size: clamp(1.5rem, 2vw, 2.2rem);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            position: relative;
-            text-align: center;
-        }
+        const accrodionContainer = document.querySelectorAll(".map-connectivity-section");
+        const accordionContent = document.querySelectorAll(".map-connectivity-content");
+        const accordionContentPlaceholder = document.querySelectorAll(".map-connectivity-showmore");
+        let connectivityCounter = 0;
+        let connectivityTimer = setInterval(connectivityCollapse,5000);
 
-        .amenities-wrapper {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 50vh;
-            /* box-shadow: 0 20px 40px rgba(0,0,0,0.1); */
-        }
-
-        .amenities-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-        }
-
-        .amenities-slide {
-            min-width: 33.333%;
-            height: 100%;
-            position: relative;
-            transition: all 0.6s ease;
-            padding: .5rem 1rem 1.5rem;
-        }
-
-        .amenities-image {
-            width: 100%;
-            height: 90%;
-            object-fit: cover;
-            transition: all 0.6s ease;
-            /* filter: blur(2px) brightness(0.7) saturate(0.8); */
-            /* transform: scale(0.9); */
-            cursor: pointer;
-            border-radius: 8px 8px 0px 0px;
-        }
-
-        .amenities-slide.amenities-center .amenities-image {
-            filter: none;
-            transform: scale(1);
-            /* box-shadow: 0 15px 30px rgba(0,0,0,0.2); */
-        }
-
-        .amenities-navigation {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            gap: 15px;
-        }
-
-        /* .amenities-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            outline: none;
-        } */
-
-        /* .amenities-dot.amenities-active {
-            background: #2d3748;
-            transform: scale(1.2);
-        }
-
-        .amenities-dot:hover {
-            background: #555;
-            transform: scale(1.1);
-        } */
-
-        .amenities-controls {
-            /* position: absolute; */
-            top: 50%;
-            /* transform: translateY(-50%); */
-            background: var(--firstlight);
-            border: 1px solid var(--darkest);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            color: var(--darkest);
-            transition: all 0.3s ease;
-            z-index: 10;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .amenities-controls:hover {
-            background: rgba(255,255,255,1);
-            transform: translateY(-10%) scale(1.1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .amenities-prev {
-            left: 20px;
-        }
-
-        .amenities-next {
-            right: 20px;
-        }
-
-        /* Text overlay styles */
-        .amenities-text-overlay {
-            position: relative;
-            /* bottom: 25px; */
-            /* bottom: 0; */
-            left: 50%;
-            transform: translateX(-50%);
-            /* background: rgba(0, 0, 0, 0.7); */
-            color: #000;
-            /* padding: 10px 20px   ; */
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 500;
-            /* backdrop-filter: blur(5px); */
-            z-index: 5;
-            pointer-events: none;
-            min-width: 160px;
-            text-align: center;
-            /* box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
-            transition: all 0.3s ease;
-            opacity: 0.9;
-        }
-
-        /* .amenities-slide.amenities-center .amenities-text-overlay {
-            background: rgba(74, 85, 104, 0.9);
-            padding: 12px 24px;
-            font-size: 18px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-        } */
-
-        /* Lightbox Styles */
-        .amenities-lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .amenities-lightbox.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .amenities-lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .amenities-lightbox-image {
-            max-width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
-            border-radius: 10px;
-            /* box-shadow: 0 20px 60px rgba(0,0,0,0.5); */
-            transition: transform 0.3s ease;
-        }
-
-        .amenities-lightbox-title {
-            color: white;
-            font-size: 1.8rem;
-            margin-top: 20px;
-            font-weight: 500;
-            text-align: center;
-            max-width: 800px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .amenities-lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .amenities-lightbox-close:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-
-        .amenities-lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .amenities-lightbox-nav:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .amenities-lightbox-prev {
-            left: 20px;
-        }
-
-        .amenities-lightbox-next {
-            right: 20px;
-        }
-
-        .amenities-lightbox-counter {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-        }
-
-        .amenities-imageContainer {
-            border: 1px solid var(--darkest);
-            height: 100%;
-            border-radius: 8px;
-        }
-        .amenitiesControlContainer {
-            position: absolute;
-            bottom: 5vh;
-            right: 5vw;
-            display: flex;
-            gap: 1rem;
-            transform: translateX(-1vw);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .amenities-title {
-                font-size: 2.3rem;
-            }
-            
-            .amenities-wrapper {
-                height: 350px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .amenities-title {
-                font-size: 2rem;
-                margin-bottom: 30px;
-            }
-            
-            .amenities-wrapper {
-                height: 300px;
-            }
-            
-            .amenities-controls {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-            
-            .amenities-prev {
-                left: 10px;
-            }
-            
-            .amenities-next {
-                right: 10px;
-            }
-
-            .amenities-lightbox-nav {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-
-            .amenities-lightbox-close {
-                top: 15px;
-                right: 15px;
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-
-            .amenities-text-overlay {
-                font-size: 14px;
-                /* padding: 8px 16px;
-                bottom: 20px; */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .amenities-slide {
-                min-width: 100%;
-            }
-            
-            .amenities-slide.amenities-center .amenities-image {
-                filter: none;
-                transform: scale(1);
-            }
-            
-            .amenities-title {
-                font-size: 1.8rem;
-            }
-            
-            .amenities-wrapper {
-                height: 250px;
-            }
-            
-            .amenities-text-overlay {
-                font-size: 13px;
-                /* padding: 6px 14px;
-                bottom: 15px; */
-            }
-            
-            .amenities-lightbox-title {
-                font-size: 1.4rem;
-                margin-top: 15px;
-            }
-            .amenitiesControlContainer {
-                position: relative;
-                justify-content: center;
-                bottom: 0;
-                right: 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .amenities-lightbox-nav {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-
-            .amenities-lightbox-prev {
-                left: 10px;
-            }
-
-            .amenities-lightbox-next {
-                right: 10px;
-            }
-
-            .amenities-lightbox-counter {
-                top: 15px;
-                left: 15px;
-                font-size: 14px;
-            }
-        }
-        
-    </style>
-</head>
-<body>
-    <div class="amenities-container">
-        <h1 class="section-headingCenter">Amenities</h1>
-        <p class="section-subHeading">Explore Premium lifestyle</p>
-        <div class="amenities-wrapper">
-        
-
-            <div class="amenities-track" id="amenitiesTrack">
-                <!-- Only original images (no duplicates) -->
-                <div class="amenities-slide">
-                    <div class="amenities-imageContainer">
-                    <img class="amenities-image" src="/assets/images/amenities/g1.webp" alt="Swimming Pool" loading="lazy">
-                    <div class="amenities-text-overlay">Infinity Pool</div>
-                    </div>
-                </div>
-                <div class="amenities-slide">
-                    <div class="amenities-imageContainer">
-                    <img class="amenities-image" src="/assets/images/amenities/g2.webp" alt="Fitness Center" loading="lazy">
-                    <div class="amenities-text-overlay">Fitness Center</div>
-                    </div>
-                </div>
-                <div class="amenities-slide">
-                    <div class="amenities-imageContainer">
-                    <img class="amenities-image" src="/assets/images/amenities/g3.webp" alt="Garden Area" loading="lazy">
-                    <div class="amenities-text-overlay">Zen Garden</div>
-                    </div>
-                </div>
-                <div class="amenities-slide">
-                    <div class="amenities-imageContainer">
-                    <img class="amenities-image" src="/assets/images/amenities/g4.webp" alt="Conference Room" loading="lazy">
-                    <div class="amenities-text-overlay">Conference Hall</div>
-                    </div>
-                </div>
-                <div class="amenities-slide">
-                    <div class="amenities-imageContainer">
-                    <img class="amenities-image" src="/assets/images/amenities/g5.webp" alt="Lounge Space" loading="lazy">
-                    <div class="amenities-text-overlay">Executive Lounge</div>
-                    </div>
-                </div>
-                <div class="amenities-slide">
-                    <div class="amenities-imageContainer">
-                    <img class="amenities-image" src="/assets/images/amenities/g6.webp" alt="Outdoor Deck" loading="lazy">
-                    <div class="amenities-text-overlay">Sky Deck</div>
-                    </div>
-                </div>
-                <div class="amenities-slide">
-                    <div class="amenities-imageContainer">
-                    <img class="amenities-image" src="/assets/images/amenities/g7.webp" alt="Outdoor Deck" loading="lazy">
-                    <div class="amenities-text-overlay">Sky Deck</div>
-                    </div>
-                </div>
-            </div>
+        function connectivityCollapse() {
+            accordionContentPlaceholder[connectivityCounter].classList.remove("showhide");
+            accordionContent[connectivityCounter].classList.remove("map-active");
+            console.log("remove",connectivityCounter);
             
             
-        </div>
-        <div class="amenitiesControlContainer">
-        <button class="amenities-controls amenities-prev" id="amenitiesPrev" aria-label="View Previous Amenities Image">
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <button class="amenities-controls amenities-next" id="amenitiesNext" aria-label="View Next Amenities Image">
-                <i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </button>
-            </div>
+            increaseConnectivityCount();
+            console.log("add",connectivityCounter);
 
-            <div class="downloadButtonContainer">
-                <button class="downloadButton" aria-label="Download All Amenities">Download Amenities</button>
-            </div>
-        
-        <!-- <div class="amenities-navigation" id="amenitiesDots">
-            Dots will be dynamically created
-        </div> -->
-    </div>
+            accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
+            setTimeout(()=>{
+                accordionContent[connectivityCounter].classList.add("map-active");
+            },300)
+        }
+        function increaseConnectivityCount() {
+            connectivityCounter = (connectivityCounter + 1) % accrodionContainer.length;
+        }
+        function resetConnectivityCounter() {
+            clearInterval(connectivityTimer);
+            connectivityTimer = setInterval(connectivityCollapse,5000);
+        }
 
-    <!-- Lightbox Modal -->
-    <div class="amenities-lightbox" id="amenitiesLightbox">
-        <div class="amenities-lightbox-content">
-            <button class="amenities-lightbox-close" id="amenitiesLightboxClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <button class="amenities-lightbox-nav amenities-lightbox-prev" id="amenitiesLightboxPrev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <img class="amenities-lightbox-image" id="amenitiesLightboxImage" src="" alt="">
-            <button class="amenities-lightbox-nav amenities-lightbox-next" id="amenitiesLightboxNext">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="amenities-lightbox-title" id="amenitiesLightboxTitle"></div>
-            <div class="amenities-lightbox-counter" id="amenitiesLightboxCounter">1 / 6</div>
-        </div>
-    </div>
+        accrodionContainer.forEach((element,index)=>{
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                for(i=0;i<accrodionContainer.length;i++){
+                    accordionContentPlaceholder[i].classList.remove("showhide");
+                    accordionContent[i].classList.remove("map-active");
+                }
+                resetConnectivityCounter();
+                connectivityCounter = index;
+                accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
+                setTimeout(()=>{
+                    accordionContent[connectivityCounter].classList.add("map-active");
+                },300);
+            });
+        });
 
-    <script>
+
+
+        //Amenities Js
+        //***********************************************************************
+        // ---------------------------------------------------------------------
+        // ******************************************************************* */
         class AmenitiesCarousel {
             constructor() {
                 // Get the original slides
@@ -890,6 +429,151 @@ amenitiesSetupImageClickEvents() {
         document.addEventListener('DOMContentLoaded', () => {
             new AmenitiesCarousel();
         });
-    </script>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+        //-----------------------------------------
+        //************************************** */
+        //----------Gallery JS ----------------------
+       document.addEventListener("DOMContentLoaded",()=>{
+        const galleryImages = document.querySelectorAll(".galleryImage");
+        const galleryLightboxContainer = document.querySelector(".gallery-lightboxContainer-overlay");
+        const galleryImageHolder = document.querySelector(".gallery-lightbox-Imageholder");
+        const galleryLightboxIndicator = document.querySelector(".gallery-lightBoxIndicator");
+        const body = document.querySelector('body');
+        let galleryIndex = 0;
+        const gallerycount = galleryImages.length + 1;
+
+        if(galleryImages.length>6){
+          const overlay = document.createElement("div");
+          overlay.className = "galleryOverlay";
+          galleryImages[5].addEventListener("load",()=>{
+            overlay.style.width = galleryImages[5].clientWidth + "px";
+            overlay.style.height = galleryImages[5].clientHeight + "px";
+          })
+          document.querySelectorAll(".gallery-imageWrapper")[5].appendChild(overlay);
+
+
+          const galleryMoreMsg = document.createElement("div");
+          galleryMoreMsg.className = "gallery-moreMsg";
+          galleryMoreMsg.innerHTML = "+"+ (gallerycount-7)+" more";
+          galleryImages[5].addEventListener("load",()=>{
+            galleryMoreMsg.style.height = galleryImages[5].clientHeight + "px";
+            galleryMoreMsg.style.width = galleryImages[5].clientWidth + "px";
+          })
+          document.querySelectorAll(".gallery-imageWrapper")[5].appendChild(galleryMoreMsg);
+
+
+          window.addEventListener("resize",(e)=>{
+            e.preventDefault();
+            document.querySelector(".galleryOverlay").style.width = galleryImages[5].clientWidth + "px";
+            document.querySelector(".galleryOverlay").style.height = galleryImages[5].clientHeight + "px";
+
+
+            document.querySelector(".gallery-moreMsg").style.width = galleryImages[5].clientWidth + "px";
+            document.querySelector(".gallery-moreMsg").style.height = galleryImages[5].clientHeight + "px";
+          })
+          
+        }
+
+        galleryImages.forEach((element,index)=>{
+          element.addEventListener("click",(e)=>{
+            e.preventDefault();
+            galleryIndex = index;
+            galleryLightboxImageChange();
+            galleryLightboxContainer.style.display = "block";
+            body.style.overflowY = "hidden";
+            document.addEventListener("keydown",galleryKeyHandler)
+          })
+        });
+
+        function galleryLightboxPrev() {
+          galleryIndex = (galleryIndex - 1 + gallerycount) % gallerycount;
+          galleryLightboxImageChange();
+          console.log(galleryIndex);
+        }
+
+        function galleryLightboxNext() {
+          galleryIndex = (galleryIndex + 1) % gallerycount;
+          galleryLightboxImageChange();
+          console.log(galleryIndex);
+        }
+
+        function galleryLightboxClose() {
+          galleryLightboxContainer.style.display = "none";
+          body.style.overflowY = "visible";
+          document.removeEventListener("keydown",galleryKeyHandler);
+        }
+
+        document.querySelector(".gallery-lightbox-close").addEventListener("click",(e)=>{
+          e.preventDefault();
+          galleryLightboxClose();
+        })
+
+        document.querySelector(".gallery-lightbox-left").addEventListener("click",(e)=>{
+          e.preventDefault();
+          galleryLightboxPrev();
+        });
+
+        document.querySelector(".gallery-lightbox-right").addEventListener("click",(e)=>{
+          e.preventDefault();
+          galleryLightboxNext();
+        });
+
+        function galleryLightboxImageChange () {
+          if (galleryIndex == galleryImages.length) {
+            galleryImageHolder.classList.add("galleryImageHide");
+            galleryLightboxIndicator.innerHTML = "";
+          }
+          else {
+            galleryImageHolder.classList.remove("galleryImageHide");
+            galleryImageHolder.src = galleryImages[galleryIndex].src;
+            galleryLightboxIndicator.innerHTML = (galleryIndex + 1) + " / " + (gallerycount - 1) ;
+          }
+        }
+
+
+        function galleryKeyHandler(e) {
+          console.log(e.key);
+          if (e.key=="ArrowLeft") {
+            galleryLightboxPrev();
+          }
+          else if (e.key=="ArrowRight") {
+            galleryLightboxNext();
+          }
+          else if (e.key=="Escape") {
+            galleryLightboxClose();
+          }
+        }
+
+        galleryLightboxContainer.addEventListener("click",(e)=>{
+          e.preventDefault();
+          if (e.target == galleryLightboxContainer) {
+            galleryLightboxClose();
+          }
+        })
+        let galleryStartX = 0;
+        galleryLightboxContainer.addEventListener("touchstart",(e)=>{
+          
+          galleryStartX = e.touches[0].clientX;
+        },{passive:true})
+
+        galleryLightboxContainer.addEventListener("touchend",(e)=>{
+          
+          const galleryEndX = e.changedTouches[0].clientX;
+          if (galleryEndX < galleryStartX - 50){
+            galleryLightboxPrev();
+          }
+          else if (galleryEndX > galleryStartX + 50) {
+            galleryLightboxNext();
+          }
+        },{passive:true})
+       })  //document.domcontentload close
+

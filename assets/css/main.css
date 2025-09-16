@@ -1,0 +1,26 @@
+:root {
+    --color: 0,128,0;
+    --verylight: rgb(var(--color),0.03);
+    --firstlight: rgb(var(--color),0.1);
+    --secondlight: rgb(var(--color),0.2);
+    --mediumlight:rgb(var(--color),0.5);
+    --thirddark:rgb(var(--color),0.8);
+    --seconddark:rgb(var(--color),0.9);
+    --darkest:rgb(var(--color),1);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-display: swap;
+    font-size: clamp(1rem,1vw,2rem);
+}
+button,a {
+    all: unset;
+    cursor: pointer;
+    font-family: "Noto Sans",Tahoma, sans-serif;
+}
+
+body {
+    font-family: "Noto Sans",Tahoma, sans-serif;
+}

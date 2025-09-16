@@ -6,7 +6,8 @@
     <title>Document</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
 
 
     <style>
@@ -144,6 +145,32 @@
             background-color: #fff;
             color: green;
             font-weight: 600;
+            text-shadow: none;
+        }
+        .OfferBannerContainer {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 100px;
+            background-color: #fff;
+            z-index: 100;
+        }
+        .fa-gift {
+            background-color: var(--firstlight);
+            color: var(--seconddark);
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .OfferBanner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2vh 1vw;
+            gap: 1vw;
         }
         @media (max-width: 768px) {
             .navbar-logo {
@@ -195,10 +222,26 @@
                 margin: 0;
 
             }
-            
+            .OfferBannerContainer {
+                margin: 2vh auto 0;
+                width: 90%;
+                position: relative;
+                bottom: 0;
+                left: 0;
+                gap: 5px;
+                background-color: var(--firstlight);
+                flex-direction: column;
+                border-radius: 8px;
+            }
+            .OfferBanner {
+                padding: 1vh 1vw;
+                width: 75%;
+                justify-content: flex-start;
+                gap: 2vw;
+            }
         }
 
-
+        
     </style>
 </head>
 <body>
@@ -241,6 +284,20 @@
             <p class="banner-subHeading">Luxurious 4 BHK Apartments & Sky Villas Starts <span class="banner-price">₹ <strong>9 Cr*</strong> Onwards</span></p>
             <button class="bannerEnquireBtn" aria-label="Enquire More about Candeur Skyline">Enquire Now</button>
         </section>
+        <div class="OfferBannerContainer">
+            <div class="OfferBanner">
+                <i class="fa fa-gift"></i>
+                <p>Payment Plan 24:24:24</p>
+            </div>
+            <div class="OfferBanner">
+                <i class="fa fa-gift"></i>
+                <p>EARLY bOOKING oFFER</p>
+            </div>
+            <div class="OfferBanner">
+                <i class="fa fa-gift"></i>
+                <p>SOME offer here random</p>
+            </div>
+        </div>
     </main>
 
 

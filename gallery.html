@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
         <!-- Preconnect to speed up DNS + TLS handshake -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,6 +171,20 @@
       @media (max-width:768px) {
         .gallery-lightboxContainer {
           width: 90%;
+        }
+        .gallery-imageWrapper:nth-child(1) {
+          height: 24vh;
+          grid-column: 1 / span 2;
+          grid-row: 1;
+        }
+        .gallery-imageWrapper:nth-child(4) {
+          grid-column: 2 / span 2;
+        }
+        .gallery-imageWrapper:nth-child(5) {
+          grid-column: 1/ span 2;
+        }
+        .galleryImageContainer {
+          grid-template-columns: 1fr .5fr 1.5fr;
         }
       }
 
