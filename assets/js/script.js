@@ -577,3 +577,97 @@ amenitiesSetupImageClickEvents() {
         },{passive:true})
        })  //document.domcontentload close
 
+
+
+
+
+
+
+        //-----------------------------------------
+        //************************************** */
+        //----------Floor and price JS ----------------------
+
+        const floorcardlength = document.querySelectorAll(".floorcard").length;
+        let floorIndex = 0;
+        let floortimer = setInterval(beginFloorCarousel,3000);
+
+        function beginFloorCarousel() {
+            floorIndex = (floorIndex + 1 ) % floorcardlength;
+            slidefloorCarousel();
+        }
+
+        document.querySelector(".floorplan-prev").addEventListener("click",(e)=>{
+            e.preventDefault();
+            floorIndex = (floorIndex + floorcardlength - 1) % floorcardlength ;
+            slidefloorCarousel();
+            resetfloortimer();
+        })
+
+        document.querySelector(".floorplan-next").addEventListener("click",(e)=>{
+            e.preventDefault();
+            floorIndex = (floorIndex + 1) % floorcardlength;
+            slidefloorCarousel();
+            resetfloortimer();
+        })
+
+        function slidefloorCarousel(){
+            document.querySelector(".floorplanCarousel").style.transform = `translateX(-${floorIndex*100}%)`;
+        }
+        function resetfloortimer() {
+            clearInterval(floortimer);
+            floortimer = setInterval(beginFloorCarousel,3000);
+        }
+
+        const track = document.querySelector(".floorplanCarousel"); // or main container
+let touchStartX = 0;
+let touchEndX = 0;
+
+// handle touch start
+track.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+// handle touch end
+track.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const swipeDistance = touchEndX - touchStartX;
+
+  // threshold to avoid accidental taps
+  if (Math.abs(swipeDistance) > 50) {
+    if (swipeDistance > 0) {
+      // swipe right → prev
+      floorIndex = (floorIndex + floorcardlength - 1) % floorcardlength;
+    } else {
+      // swipe left → next
+      floorIndex = (floorIndex + 1) % floorcardlength;
+    }
+
+    slidefloorCarousel();
+    resetfloortimer();
+  }
+}
+
+
+/******************************************* */
+//-----------Overview -------------------------
+/******************************************* */
+
+
+        document.querySelectorAll(".readMoreLink").forEach((element,index)=>{
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                const clamp = document.querySelectorAll(".clampText")[index];
+                if (clamp.classList.contains("clampText-overflow")) {
+                    clamp.classList.remove("clampText-overflow");
+                    element.innerHTML = "Read More ▶";
+                }
+                else {
+                    clamp.classList.add("clampText-overflow");
+                    element.innerHTML = "Read Less ◄";
+                }
+            })
+        })

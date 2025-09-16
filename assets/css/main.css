@@ -7,6 +7,9 @@
     --thirddark:rgb(var(--color),0.8);
     --seconddark:rgb(var(--color),0.9);
     --darkest:rgb(var(--color),1);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --bg-light: #f9fafb;
+    --bg-white: #ffffff;
 }
 *{
     margin: 0;

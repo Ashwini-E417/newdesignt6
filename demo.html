@@ -1,197 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Overview</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Navigation Menu (Left Side)</title>
+    <style>
+        /* --- Basic Setup & Background --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" />
-  </noscript>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: url('https://images.unsplash.com/photo-1588854337236-6889d631f385?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center / cover;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scrolling when menu is open */
+        }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-display: swap;
-      font-size: clamp(1rem, 1vw, 2rem);
-    }
+        .content {
+            padding: 40px;
+            color: white;
+        }
+        .content h1 {
+            font-size: 48px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
 
-    body {
-      font-family: 'Noto Sans', Tahoma, sans-serif;
-    }
+        /* --- Burger Menu Button --- */
+        .burger-menu {
+            position: fixed;
+            top: 30px;
+            left: 30px; /* MODIFIED: Moved to the left */
+            width: 40px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    :root {
-      --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --bg-white: #ffffff;
-      --text-primary: #111;
-      --text-secondary: #444;
-    }
+        .burger-menu .bar {
+            width: 100%;
+            height: 4px;
+            background-color: #000;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Animation for burger to 'X' */
+        .nav-modal.active + .burger-menu .bar1 {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        .nav-modal.active + .burger-menu .bar2 {
+            opacity: 0;
+        }
+        .nav-modal.active + .burger-menu .bar3 {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
 
-    .overview-Container {
-      padding: 5vh 5vw;
-      background: var(--bg-white);
-      overflow: hidden;
-    }
 
-    .overviewImg {
-      float: left;
-      width: 40%;
-      height: auto;
-      margin: 0 2rem 1rem 0;
-      border-radius: 10px;
-      border: 1px solid #eee;
-    }
+        /* --- Navigation Modal --- */
+        .nav-modal {
+            position: fixed;
+            top: 0;
+            left: 0; /* Changed from right to left for consistency */
+            width: 100%;
+            height: 100%;
+            background-color: rgba(69, 56, 45, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
 
-    .section-heading {
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      font-weight: 700;
-      background: green;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-      position: relative;
-    }
+        .nav-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .nav-content {
+            position: absolute;
+            top: 20px;
+            left: 20px; /* MODIFIED: Positioned from the left */
+            width: 90%;
+            max-width: 360px;
+            background-color: rgba(69, 56, 45, 0.85);
+            padding: 40px;
+            border-radius: 16px;
+            
+            /* MODIFIED: Slide-in animation from the left */
+            transform: translateX(calc(-100% - 40px));
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .nav-modal.active .nav-content {
+            transform: translateX(0);
+        }
+        
+        .nav-links ul {
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-bottom: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 26px;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a.active-link {
+            color: white;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            padding-bottom: 4px;
+        }
 
-    .section-heading::after {
-      content: '';
-      position: absolute;
-      bottom: -0.5rem;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: green;
-      border-radius: 2px;
-    }
+        /* --- Call-back Button --- */
+        .request-callback-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 15px 25px;
+            border-radius: 50px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid transparent;
+            z-index: 1;
+            overflow: hidden;
+            margin-top: 20px;
+        }
 
-    .section-subHeading {
-      font-size: clamp(1.5rem, 2vw, 2.2rem);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-    }
+        .request-callback-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(to right, #e6c2b1, #d3a995, #b87c63);
+        }
+        
+        .request-callback-btn .arrow {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid white;
+            margin-left: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .request-callback-btn:hover .arrow {
+             transform: rotate(45deg);
+        }
 
-    .clampText {
-      font-size: clamp(1rem, 1.2vw, 1.1rem);
-      line-height: 1.8;
-      color: var(--text-secondary);
-      display: block;
-      overflow: hidden;
-      max-height: 8rem;
-      transition: all 0.5s ease;
-      position: relative;
-      margin-bottom: 2rem;
-    }
-
-    .clampText::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2rem;
-      background: linear-gradient(transparent, var(--bg-white));
-      pointer-events: none;
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-
-    .clampText-overflow {
-      max-height: none;
-    }
-
-    .clampText-overflow::after {
-      opacity: 0;
-    }
-
-    .readMoreLink {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: green;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.8rem 1.5rem;
-      border: 2px solid green;
-      border-radius: 50px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .readMoreLink::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: green;
-      transition: left 0.3s ease;
-      z-index: -1;
-    }
-
-    .readMoreLink:hover {
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-medium);
-    }
-
-    .readMoreLink:hover::before {
-      left: 0;
-    }
-
-    @media (max-width: 768px) {
-      .overviewImg {
-        float: none;
-        display: block;
-        margin: 1rem auto;
-        width: 100%;
-        max-width: 100%;
-      }
-    }
-  </style>
+    </style>
 </head>
 <body>
 
-  <section class="section-container">
-    <div class="overview-Container">
-      <h2 class="section-heading">Overview</h2>
-      <p class="section-subHeading">Welcome to Candeur Skyline</p>
-
-      <p class="clampText">
-        <img src="assets/images/extra/overviewImg1.webp" alt="Overview" class="overviewImg" loading="lazy" />
-        Candeur Skyline by Candeur Constructions brings unmatched luxury to the Financial District, Hyderabad. Spread across 4.04 acres, Candeur Skyline offers exclusive 4 BHK apartments and sky villas across 4 impressive towers, each soaring 58 storeys high with just 282 residences. At Candeur Skyline, residents experience refined living with world-class amenities, including a 60,000 sq. ft. clubhouse, Badminton Courts, Cricket Nets, a Barbeque Zone, Leisure Park, Hoops Court, Jogging Trail, Outdoor Fitness Station, Tot Lot, and a Herb Garden. More than just luxury, Candeur Skyline creates a vibrant community where neighbours connect and friendships flourish. With regular events, group activities, and recreational spaces, Candeur Skyline fosters a lifestyle of togetherness and belonging. Discover the perfect blend of privacy, community, and modern living at Candeur Skyline, where every day feels like a new experience. Choose Candeur Skyline, where life truly elevates.
-      </p>
-
-      <a href="#" class="readMoreLink">Read More ▶</a>
+    <div class="content">
+        <h1>Website Content</h1>
+        <p>Click the hamburger menu to open navigation.</p>
     </div>
-  </section>
 
-  <script>
-    document.querySelectorAll(".readMoreLink").forEach((element, index) => {
-      element.addEventListener("click", (e) => {
-        e.preventDefault();
-        const clamp = document.querySelectorAll(".clampText")[index];
-        if (clamp.classList.contains("clampText-overflow")) {
-          clamp.classList.remove("clampText-overflow");
-          element.innerHTML = "Read More ▶";
-        } else {
-          clamp.classList.add("clampText-overflow");
-          element.innerHTML = "Read Less ◄";
-        }
-      });
-    });
-  </script>
+    <div class="nav-modal" id="navModal">
+        <div class="nav-content">
+            <div class="nav-links">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Architect</a></li>
+                    <li><a href="#" class="active-link">Project Highlights</a></li>
+                    <li><a href="#">Floor Plan</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Location Highlights</a></li>
+                </ul>
+            </div>
+            <a href="#" class="request-callback-btn">
+                Request a call-back
+                <span class="arrow">↗</span>
+            </a>
+        </div>
+    </div>
+    
+    <button class="burger-menu" id="burgerMenu">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+    </button>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerMenu = document.getElementById('burgerMenu');
+            const navModal = document.getElementById('navModal');
+
+            const toggleMenu = () => {
+                navModal.classList.toggle('active');
+            };
+
+            burgerMenu.addEventListener('click', toggleMenu);
+
+            navModal.addEventListener('click', (event) => {
+                if (event.target === navModal) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
