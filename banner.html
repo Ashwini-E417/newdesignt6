@@ -26,7 +26,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000;
+            z-index: 1001;
         }
         nav {
             display: flex;
@@ -55,6 +55,9 @@
             color: #000;
             clip-path: polygon(0 0%, 100% 0%, 100% 100%, 20% 100%, 0% 0%);
             font-size: clamp(1vw,1.5vw,6rem);
+        }
+        .nav-phone, .nav-whatsapp {
+            display: block;
         }
         .bannerTrack::before {
             inset: 0;
@@ -105,7 +108,7 @@
             transform: translateY(-50%);
             color: #fff;
             left: 5vw;
-            z-index: 1000;
+            z-index: 100;
             text-shadow: 0 2px 2px rgba(0,0,0,0.6);
         }
         .banner-projectHeading {
@@ -133,6 +136,7 @@
         }
         .banner-price {
             display: block;
+            font-weight: 500;
         }
         .banner-price strong {
             font-weight: 600;
@@ -174,6 +178,9 @@
             padding: 2vh 1vw;
             gap: 1vw;
         }
+        .banner-projectHeadingOffer {
+            display: none;
+        }
         @media (max-width: 768px) {
             .navbar-logo {
                 width: 20vw;
@@ -191,15 +198,22 @@
             .menubar {
                 display: none;
             }
-
+            .nav-phone,.nav-whatsapp {
+                display: none;
+            }
             .banner-contentContainer {
                 position: relative;
                 transform: translate(0);
                 color: #000;
                 text-shadow: none;
                 left: 0;
-                /* padding: 1vh 2vw; */
+                padding: 1vh 2vw;
                 text-align: center;
+                top: 0;
+                margin: 0;
+                transform: translateY(-20px);
+                border-radius: 30px 30px 0 0;
+                background: #fff;
             }
             .bannerEnquireBtn {
                 background-color: green;
@@ -212,43 +226,58 @@
                 background-color: transparent;
                 margin: 0 auto;
                 font-weight: 400;
+                padding: 1vh 4vw;
             }
             .banner-projectHeadingOffer {
                 background-color: green;
-                margin: -1vh 0 1vh 0;
+                margin: 0vh 0 1vh 0;
                 color: #fff;
                 padding: 1vh 0;
+                display: block;
+                border-radius: 50px;
             }
             .banner-subHeading {
                 margin: 2vh 0 0;
+                padding: 0 2vw;
+                font-weight: 500;
             }
             .banner-projectDeveloper {
                 margin: 0;
                 font-weight: 400;
             }
             .OfferBannerContainer {
-                margin: 2vh auto 0;
+                margin: -2vh auto 0;
                 width: 90%;
                 position: relative;
                 bottom: 0;
                 left: 0;
-                gap: 5px;
-                background-color: var(--firstlight);
+                gap: 10px;
+                background-color: #fafafa;
                 flex-direction: column;
                 border-radius: 8px;
+                padding: 2vh 3vw;
             }
             .OfferBanner {
-                padding: 1vh 1vw;
-                width: 75%;
+                padding: 1.5vh 2vw;
+                width: 100%;
                 justify-content: flex-start;
                 gap: 2vw;
+                box-shadow: var(--shadow-medium);
+                background: #fff;
+                border-radius: 4px;
+                border-left: 2px solid var(--darkest);
             }
             .projectlocationBinder {
-                background-color: var(--firstlight);
-                width: 90%;
-                border-radius: 4px;
-                margin: 0 auto;
-                padding: 1vh 0 0;
+                /* background-color: var(--firstlight); */
+                width: fit-content;
+                border-radius: 50px;
+                margin: 0vh auto;
+                /* padding: 1vh 0 0; */
+            }
+            .banner-price {
+                text-decoration-line: underline;
+                text-decoration-color: var(--darkest);
+                text-decoration-thickness: .5vh;
             }
         }
 
@@ -257,26 +286,96 @@
 
     <style>
         .burger-menu {
-            position: fixed;
-            top: 20px;
-            right: 30px; /* MODIFIED: Moved to the left */
-            width: 30px;
-            height: 30px;
+             /* MODIFIED: Moved to the left */
+            width: 7vw;
+            height: 3vh;
             background: transparent;
             border: none;
             cursor: pointer;
-            z-index: 1001;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
-        .burger-menu .bar {
+
+        .burger-menu span {
+            background: #000; /* default black */
             width: 100%;
-            height: 4px;
-            background-color: #000;
-            border-radius: 2px;
-            transition: all 0.3s ease-in-out;
+            height: 2px;
+            display: block;
+            position: absolute;
+            left: 0;
+            transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        
+        .burger-menu span:nth-child(1) {
+            top: 0;
+        }
+
+        .burger-menu span:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+        }
+
+        .burger-menu span:nth-child(3) {
+        bottom: 0;
+        }
+
+.navModal {
+    display: none;
+}
+.bannerMobileEnquire {
+    display: none;
+}
+        @media (max-width:768px) {
+            .burger-menu {
+                display: flex;
+            }
+            .burger-menu.mobMenuOpen span:nth-child(1) {
+  transform-origin: center;
+  transform: rotate(-45deg) translateY(-50%) translateX(0.5px);
+  top: 50%;
+}
+
+.mobMenuOpen.burger-menu span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobMenuOpen.burger-menu span:nth-child(3) {
+  transform-origin: center;
+  transform: rotate(45deg) translateY(-50%) translateX(-0.5px);
+  bottom: auto;
+  top: 50%;
+}
+.navModal {
+    background-color: #fafafa;
+    width: 100%;
+    height: fit-content;
+    position: fixed;
+    display: block;
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.25, 0, 0.30, 0.1);
+    z-index: 1000;
+    box-shadow:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.navModal span {
+    height: fit-content;
+}
+.nav-button {
+    display: block;
+    padding: 1vh 0;
+    border-bottom: 1px solid #ddd;
+    width: 90%;
+    margin: 0 auto;
+}
+.navModal-active {
+    transform: translateX(0);
+}
+.bannerMobileEnquire {
+    display: block;
+}
+
         }
     </style>
 </head>
@@ -295,16 +394,27 @@
                 <a href="" title="" aria-label="" role="menuitem">Brochure</a>
             </span>
             <span class="nav-mobileWhatsapp" role="menu">
-                <a href="" title="" aria-label="" role="menuitem">+1234567890</a>
-                <a href="" title="" aria-label="" role="menuitem">Whatsapp</a>
-                <button class="burger-menu" id="burgerMenu">
-                    <div class="bar bar1"></div>
-                    <div class="bar bar2"></div>
-                    <div class="bar bar3"></div>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-phone">+1234567890</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-whatsapp">Whatsapp</a>
+                <button class="burger-menu" id="burgerMenu" role="menuitem" aria-label="Open Menubar">
+                    <span class="bar bar1"></span>
+                    <span class="bar bar2"></span>
+                    <span class="bar bar3"></span>
                 </button>
             </span>
         </nav>
+        
     </header>
+    <div class="navModal" id="navModal" role="menu">
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Overview</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Price</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Floor Plan</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Amenities</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Gallery</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Location</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Virtual Tour</a>
+                <a href="" title="" aria-label="" role="menuitem" class="nav-button">Brochure</a>
+        </div>
     <main>
         <section>
             <div class=bannerTrack>
@@ -321,8 +431,9 @@
         <section class="banner-contentContainer">
             <p class="banner-projectHeadingOffer">Limited Time Offer!</p>
             <h1 class="banner-projectHeading">Candeur Skyline</h1>
-            <div class="projectlocationBinder">
+            
             <p class="banner-projectDeveloper">By Candeur Skyline</p>
+            <div class="projectlocationBinder">
             <p class="banner-projectLocation">At Finanical District, Hyderabad</p>
             </div>
             <p class="banner-subHeading">Luxurious 4 BHK Apartments & Sky Villas Starts <span class="banner-price">₹ <strong>9 Cr*</strong> Onwards</span></p>
@@ -342,10 +453,67 @@
                 <p>SOME offer here random</p>
             </div>
         </div>
-        <div class="downloadButtonContainer">
+        <div class="downloadButtonContainer bannerMobileEnquire">
             <button class="downloadButton">Enquire Now</button>
         </div>
     </main>
+
+    <style>
+        .bannerFormSection {
+            margin-top: 2vh;
+            padding: 3vh 5vw;
+            background: var(--firstlight);
+            display: none;
+        }
+        .bannerformHeading {
+            font-size: clamp(1.2rem,5.5vw,2rem);
+            font-weight: 500;
+        }
+        .bannerFormSubheading {
+            font-size: 1.2rem;
+            margin-bottom: 2vh;
+        }
+        .banner-submitBtn {
+            background-color: var(--secondlight);
+            color: var(--darkest);
+            border: 0;
+            padding: 2vh 5vw;
+            margin: 1rem 0 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        @media (max-width:768px) {
+            .bannerFormSection {
+                display: block;
+            }
+        }
+    </style>
+
+    <div class="bannerFormSection">
+        <h2 class="bannerformHeading">Want to Know More?</h2>
+        <p class="bannerFormSubheading">Register with us</p>
+        <form>
+            <div class="input-group">
+                <input type="text" name="name" placeholder="Enter Your Name" class="input-box" required autocomplete="name" />
+            </div>
+            <div class="input-group">
+                <select name="countrycode" class="input-box" aria-label="Enter Country Code" required>
+                    <option value="+91" selected>India (+91)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <input type="text" name="number" placeholder="Enter Mobile Number" class="input-box" required autocomplete="mobile" />
+            </div>
+            <div class="input-group input-group2">
+                <input type="checkbox" id="consent-checkbox1" required checked>
+                <label for="consent-checkbox1" class="consent-checkbox1">I consent to the use of provided data in accordance with the <a href="https://www.homesfy.co.in/privacy.html" target="_blank" rel="noopner noreferer">privacy policy</a></label>
+            </div>
+            <div class="input-group" style="text-align: center;">
+                <input type="submit" value="Submit" class="banner-submitBtn">
+            </div>
+        </form>
+    </div>
 
 
 
@@ -364,5 +532,19 @@ function updateBannerCorousel() {
     }
 }
     </script>
+
+
+<script>
+    document.getElementById("burgerMenu").addEventListener("click", function () {
+  document.getElementById("burgerMenu").classList.toggle("mobMenuOpen");
+  document.getElementById("navModal").classList.toggle("navModal-active");
+});
+document.addEventListener("DOMContentLoaded",()=>{
+    document.getElementById("navModal").style.top = (document.querySelector("header").clientHeight + 5) + "px";
+})
+window.addEventListener("resize",()=>{
+    document.getElementById("navModal").style.top = (document.querySelector("header").clientHeight + 5) + "px";
+})
+</script>
 </body>
 </html>
