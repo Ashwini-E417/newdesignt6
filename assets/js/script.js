@@ -671,3 +671,37 @@ function handleSwipe() {
                 }
             })
         })
+
+
+
+
+
+        setInterval(updateBannerCorousel,5000);
+
+let bannerImage = document.querySelectorAll(".bannerImage");
+let bannerContainer = document.querySelector(".banner");
+let bannertransform = 0;
+let bannercount = 0;
+function updateBannerCorousel() {
+    bannerContainer.style.transform =  `translateX(-${bannercount*100}%)`;
+    bannercount+=1;
+    if (bannercount>bannerImage.length-1){
+        bannercount=0;
+    }
+}
+
+document.getElementById("burgerMenu").addEventListener("click", function () {
+  document.getElementById("burgerMenu").classList.toggle("mobMenuOpen");
+  document.getElementById("navModal").classList.toggle("navModal-active");
+});
+document.addEventListener("DOMContentLoaded",()=>{
+    document.getElementById("navModal").style.top = (document.querySelector("header").clientHeight + 5) + "px";
+})
+window.addEventListener("resize",()=>{
+    document.getElementById("navModal").style.top = (document.querySelector("header").clientHeight + 5) + "px";
+})
+
+window.addEventListener("scroll", function () {
+        let e = document.getElementById("navbar");
+        window.scrollY > 30 ? e.classList.add("scrollednav") : e.classList.remove("scrollednav");
+    });

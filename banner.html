@@ -377,6 +377,9 @@
 }
 
         }
+        .scrollednav {
+            background: var(--darkest);
+        }
     </style>
 </head>
 <body>
@@ -545,6 +548,11 @@ document.addEventListener("DOMContentLoaded",()=>{
 window.addEventListener("resize",()=>{
     document.getElementById("navModal").style.top = (document.querySelector("header").clientHeight + 5) + "px";
 })
+
+window.addEventListener("scroll", function () {
+        let e = document.getElementById("navbar");
+        window.scrollY > 30 ? e.classList.add("scrollednav") : e.classList.remove("scrollednav");
+    });
 </script>
 </body>
 </html>
