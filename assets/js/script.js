@@ -30,11 +30,9 @@
         function connectivityCollapse() {
             accordionContentPlaceholder[connectivityCounter].classList.remove("showhide");
             accordionContent[connectivityCounter].classList.remove("map-active");
-            console.log("remove",connectivityCounter);
             
             
             increaseConnectivityCount();
-            console.log("add",connectivityCounter);
 
             accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
             setTimeout(()=>{
@@ -497,13 +495,11 @@ amenitiesSetupImageClickEvents() {
         function galleryLightboxPrev() {
           galleryIndex = (galleryIndex - 1 + gallerycount) % gallerycount;
           galleryLightboxImageChange();
-          console.log(galleryIndex);
         }
 
         function galleryLightboxNext() {
           galleryIndex = (galleryIndex + 1) % gallerycount;
           galleryLightboxImageChange();
-          console.log(galleryIndex);
         }
 
         function galleryLightboxClose() {
@@ -541,7 +537,6 @@ amenitiesSetupImageClickEvents() {
 
 
         function galleryKeyHandler(e) {
-          console.log(e.key);
           if (e.key=="ArrowLeft") {
             galleryLightboxPrev();
           }
@@ -694,6 +689,7 @@ document.getElementById("burgerMenu").addEventListener("click", function () {
   document.getElementById("burgerMenu").classList.toggle("mobMenuOpen");
   document.getElementById("navModal").classList.toggle("navModal-active");
 });
+
 document.addEventListener("DOMContentLoaded",()=>{
     document.getElementById("navModal").style.top = (document.querySelector("header").clientHeight + 5) + "px";
 })
@@ -705,3 +701,23 @@ window.addEventListener("scroll", function () {
         let e = document.getElementById("navbar");
         window.scrollY > 30 ? e.classList.add("scrollednav") : e.classList.remove("scrollednav");
     });
+
+
+document.querySelectorAll(".nav-button").forEach(element=>{
+    element.addEventListener("click",(e)=>{
+        e.preventDefault();
+        const target = e.target.getAttribute("href");
+        if (document.querySelector(".navModal").classList) {
+            document.getElementById("burgerMenu").classList.toggle("mobMenuOpen");
+            document.getElementById("navModal").classList.toggle("navModal-active");
+        }
+        if (target === "#") {
+            console.log("trigger popup");
+            return;
+        }
+        const targetsection = document.getElementById(target.substring(1));
+        targetsection.scrollIntoView({
+            behavior: "smooth",
+        })
+    })
+})

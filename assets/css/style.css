@@ -838,6 +838,7 @@
         --**********************************************/
       .gallery-container {
         padding: 5vh 5vw;
+        background: rgb(0,255,0,0.1);
       }
      
       .galleryImageContainer {
@@ -996,6 +997,9 @@
         .galleryImageContainer {
           grid-template-columns: 1fr .5fr 1.5fr;
         }
+        .gallery-imageWrapper {
+            height: 24vh;
+        }
       }
 
 
@@ -1026,7 +1030,7 @@
   
     .floorprice-Container {
         padding: 5vh 5vw;
-        background-color: rgb(0,255,0,0.1);
+        /* background-color: rgb(0,255,0,0.1); */
     }
     .floorplan-flexContainer {
         display: flex;
@@ -1165,7 +1169,7 @@
 
 
         .overview-Container {
-            background-color: rgb(0,255,0,0.1);
+            /* background-color: rgb(0,255,0,0.1); */
             padding: 5vh 5vw;
             /* display: flex;
             gap: 2%; */
@@ -1203,7 +1207,7 @@
             color: var(--text-secondary);
             display: block;
             overflow: hidden;
-            max-height: 8rem;
+            max-height: 15rem;
             /* transition: all 0.5s cubic-bezier(0.2, 1, 0.4, 0); */
             transition:  max-height 0.4s ease;
             position: relative;
@@ -1307,7 +1311,7 @@
             border-radius: 2px;
         } */
             .highlight-Container {
-                /* background-color: rgb(0,255,0,0.1); */
+                background-color: rgb(0,255,0,0.1);
                 padding: 5vh 5vw;
                 text-align: center;
             }
