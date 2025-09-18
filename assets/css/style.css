@@ -8,7 +8,7 @@
     text-align: center;
 }
 .section-headingCenter {
-    font-size: clamp(1.7rem, 4vw, 4rem);
+    font-size: clamp(2.1rem, 4vw, 4rem);
     font-weight: 700;
     background: green;
     background-clip: text;
@@ -399,8 +399,8 @@
             position: relative;
         }
         
-        .section-headingCenter {
-            font-size: clamp(2.5rem, 4vw, 4rem);
+        /* .section-headingCenter {
+            font-size: clamp(2.rem, 4vw, 4rem);
             font-weight: 700;
             background: var(--darkest);
             background-clip: text;
@@ -409,7 +409,7 @@
             margin-bottom: .5rem;
             position: relative;
             text-align: center;
-        }
+        } */
         .section-subHeading {
             font-size: clamp(1.5rem, 2vw, 2.2rem);
             font-weight: 600;
@@ -1283,7 +1283,7 @@
                 margin-top: 1rem;
             }
         }
-            .section-headingCenter {
+            /* .section-headingCenter {
             font-size: clamp(2.5rem, 4vw, 4rem);
             font-weight: 700;
             background: green;
@@ -1293,7 +1293,7 @@
             margin-bottom: .5rem;
             position: relative;
             text-align: center;
-        }
+        } */
 
         /* .section-headingCenter::after {
             content: '';
@@ -1327,6 +1327,7 @@
                 box-shadow:  0 0 1px 1px rgb(0, 128, 0, 0.1);
                 margin-bottom: 1rem;
                 transition: transform 0.3s ease-in-out;
+                border: 1px solid #eee;
             }
             .highlightPoint:hover {
                 transform: translateY(-3px);
@@ -1340,13 +1341,16 @@
                 font-size: clamp(1rem,2.5vh,2rem);
                 font-weight: 600;
                 color: #888;
+                border: 1px solid var(--darkest);
             }
             .highlightpoint-content {
                 color: #000;
+                text-align: left;
             }
             @media (max-width:600px) {
                 .highlightPoint {
                     flex: 0 0 100%;
+                    padding: 2vh 2vw;
                 }
             }
 
