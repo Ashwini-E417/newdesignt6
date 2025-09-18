@@ -390,7 +390,8 @@ body {
         .bannerFormSection {
             margin-top: 2vh;
             padding: 3vh 5vw;
-            background: var(--firstlight);
+            background: #fafafa;
+            box-shadow: var(--shadow-medium);
             display: none;
         }
         .bannerformHeading {
