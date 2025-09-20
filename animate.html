@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fade-right {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-right.fade {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+    </style>
+</head>
+<body>
+    <section>
+        <img src="assets/images/banner/banner.webp" alt="" height="100" width="100" class="animateRight fade-right"/>
+        <img src="assets/images/banner/banner2.webp" alt="" height="100" width="100" class="animateLeft"/>
+    </section>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(".fade-right");
+
+    const observer = new IntersectionObserver(
+        (entries, observerInstance) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+                    if(!entry.target.classList.contains("fade")){
+                    entry.target.classList.add("fade");
+                    // observerInstance.unobserve(entry.target); // Remove if you only want it to animate once
+                    }
+                }
+                else if (!entry.isIntersecting && entry.intersectionRatio <0.3) {
+                    entry.target.classList.remove("fade");
+                }
+            });
+        },
+        {
+            threshold: [0.1,0.3] // Trigger when 10% of the section is visible
+        }
+    );
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+
+</script>
+
+</body>
+</html>

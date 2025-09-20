@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
             <!-- Preconnect to speed up DNS + TLS handshake -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,7 +106,7 @@
             <button class="downloadButton popuptrigger">Enquire Now</button>
         </div>
     </main>
-    <div class="bannerFormSection">
+    <div class="bannerFormSection fade-up">
         <h2 class="bannerformHeading">Want to Know More?</h2>
         <p class="bannerFormSubheading">Register with us</p>
         <form>
@@ -131,7 +132,7 @@
     </div>
 
     <!-- Overview -->
-     <section class="section-container" id="overview">
+     <section class="section-container fade-up" id="overview">
         <div class="overview-Container">
             <div class="overview-flexRightContainer">
                 <h2 class="section-headingCenter">Overview</h2>
@@ -150,7 +151,7 @@
 
     <!-- highlight -->
 
-    <section class="section-container">
+    <section class="section-container fade-up">
         <div class="highlight-Container">
             <h2 class="section-headingCenter">Project Highlight</h2>
             <p class="section-subHeading">Explore Candeur Skyline</p>
@@ -183,7 +184,7 @@
     </section>
 
     <!-- Amenities -->
-     <section id="amenities">
+     <section id="amenities" class="fade-up">
         <div class="amenities-container">
         <h1 class="section-headingCenter">Amenities</h1>
         <p class="section-subHeading">Explore Premium lifestyle</p>
@@ -275,9 +276,9 @@
      </section>
 
      <!-- CTA -->
-      <section>
+      <section >
         <div class="cta-section">
-            <div class="cta-leftsection">
+            <div class="cta-leftsection fade-right">
                 <p class="cta-heading">Elevate Your Lifestyle</p>
                 <p class="cta-subheading">Experience luxury living at its finest. Book now and schedule a complimentary site visit to discover your dream home.</p>
 
@@ -290,7 +291,7 @@
                     <button class="downloadButton popuptrigger"> Book Now </button>
                 </div>
             </div>
-            <div class="cta-rightSection">
+            <div class="cta-rightSection fade-left">
             <img src="assets/images/banner/banner.webp" alt="Happy Home" loading="lazy" class="cta-image">
             </div>
         </div>
@@ -302,7 +303,7 @@
         <h2 class="section-headingCenter">Floor And Price Plan</h2>
         <p class="section-subHeading">Explore Floor and price plan</p>
         <div class="floorplan-flexContainer">
-            <div class="floorplan-imgCarouselContainer">
+            <div class="floorplan-imgCarouselContainer fade-right">
                 <div class="floorplanCarousel">
                     <div class="floorcard popuptrigger">
                         <img src="assets/images/banner/banner.webp" alt="Floor Plan" loading="lazy" width="100%" height="90%" class="floorImg"/>
@@ -324,7 +325,7 @@
                     </button>
                 </div>
             </div>
-            <div class="pricePlanContainer">
+            <div class="pricePlanContainer fade-left">
                 <div class="pricerow">
                     <b class="pricetype">Typology</b>
                     <b class="priceCarpet">Carpet Area</b>
@@ -355,7 +356,7 @@
 
      <!-- Gallery -->
       <section id="gallery">
-    <div class="gallery-container" >
+    <div class="gallery-container fade-up" >
       <h2 class="section-headingCenter">Gallery</h2>
       <div class="galleryImageContainer">
         <div class="gallery-imageWrapper">
@@ -401,7 +402,7 @@
   </section>
 
     <!-- Location -->
-     <section id="location">
+     <section id="location" class="fade-up">
         <div class="location-wrapper">
             <h2 class="section-headingCenter">Location Advantages</h2>
             <div class="toogle-buttonWrapper">
@@ -573,7 +574,7 @@
     </section>
 
     <!-- Virtual tour site -->
-     <section id="virtual">
+     <section id="virtual" class="fade-up">
         <div class="virtual-sectionContainer">
             <h2 class="section-headingCenter">Virtual/360<sup>o</sup> Tour</h2>
             <div class="virtualimage-container popuptrigger">
@@ -593,14 +594,14 @@
     <!-- About -->
      <section>
         <div class="about-sectionContainer">
-            <div class="about-leftContainer">
+            <div class="about-leftContainer fade-right">
                 <h2 class="section-headingCenter about-sectionHeading">About Developer</h2>
                 <p class="section-subHeading"></p>
                 <p class="aboutDeveloper-description">
                     Candeur Constructions, one of India's top property developers, prioritises meeting customer needs and delivering high-quality projects within budget and on schedule. The company has completed two residential projects - Candeur Carlisle in Mahadevpura and Candeur Rise in Varthur, East Bangalore. It plans to launch additional projects that contribute to the development of residential and mixed-use real estate in Bangalore. Candeur Constructions maintains quality objectives and has established quality assurance systems to monitor progress. Additionally, every project by Candeur Constructions upholds the highest standards of quality and excellence, making the builder a popular choice among buyers.
                 </p>
             </div>
-            <div class="about-rightContainer">
+            <div class="about-rightContainer fade-left">
                 <div class="about-formContainer">
                     <h3 class="about-formHeading">Still Got Questions?</h3>
                     <p class="about-formSubheading">Let us help you Answer it</p>
@@ -634,7 +635,7 @@
 
     <!-- Footer -->
 
-    <footer class=section-container role=contentinfo aria-label=Footer id=footer>
+    <footer class="section-container fade-up" role=contentinfo aria-label=Footer id=footer>
 <div class=footer-qr-section>
 <div class=footer-qr-item>
 <img src="assets/images/qr/qr.webp" alt="QR code for prestige" class=footer-qr-image loading=lazy>
@@ -715,7 +716,7 @@ Project RERA: P51700046312
                     <input type="text" placeholder="Enter Mobile Number" aria-label="Enter Mobile Number" class="input-box" required/>
                     </div>
                     <div class="input-group input-group2">
-                    <input type="checkbox"  id="popup-formCheckbox" required/>
+                    <input type="checkbox"  id="popup-formCheckbox" required checked/>
                     <label for="popup-formCheckbox" class="consent-checkbox1">I consent to the use of provided data in accordance with the <a href="https://www.homesfy.co.in/privacy.html" target="_blank" rel="noopner noreferer" class="">privacy policy</a></label>
                     </div>
                     <button class="popup-formSubmitBtn">Submit</button>
@@ -740,29 +741,8 @@ Project RERA: P51700046312
     </div>
 </section>
 
-<style>
-    #footer-ivr {display: none;}
-    .footer-IvrContainer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: var(--darkest);
-        color: #fff;
-        padding: 10px;
-    }
-    .footerCall {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    @media (max-width:768px) {
-        #footer-ivr {display: block;}
-    }
-</style>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/animate.js"></script>
 </body>
 </html>
