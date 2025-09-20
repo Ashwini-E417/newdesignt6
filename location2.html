@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Location </title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
         <!-- Preconnect to speed up DNS + TLS handshake -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -421,50 +422,72 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         const accrodionContainer = document.querySelectorAll(".map-connectivity-section");
         const accordionContent = document.querySelectorAll(".map-connectivity-content");
         const accordionContentPlaceholder = document.querySelectorAll(".map-connectivity-showmore");
         let connectivityCounter = 0;
-        let connectivityTimer = setInterval(connectivityCollapse,5000);
 
-        function connectivityCollapse() {
-            accordionContentPlaceholder[connectivityCounter].classList.remove("showhide");
-            accordionContent[connectivityCounter].classList.remove("map-active");
-            console.log("remove",connectivityCounter);
-            
-            
-            increaseConnectivityCount();
-            console.log("add",connectivityCounter);
-
-            accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
-            setTimeout(()=>{
-                accordionContent[connectivityCounter].classList.add("map-active");
-            },300)
-        }
         function increaseConnectivityCount() {
             connectivityCounter = (connectivityCounter + 1) % accrodionContainer.length;
-        }
-        function resetConnectivityCounter() {
-            clearInterval(connectivityTimer);
-            connectivityTimer = setInterval(connectivityCollapse,5000);
         }
 
         accrodionContainer.forEach((element,index)=>{
             element.addEventListener("click",(e)=>{
                 e.preventDefault();
-                for(i=0;i<accrodionContainer.length;i++){
-                    accordionContentPlaceholder[i].classList.remove("showhide");
+                for(let i=0;i<accrodionContainer.length;i++){
                     accordionContent[i].classList.remove("map-active");
+                    console.log(i);
+                    setTimeout(()=>{
+                        console.log("s",i);
+                        accordionContentPlaceholder[i].classList.remove("showhide");
+                    },10);
+                    
                 }
-                resetConnectivityCounter();
-                connectivityCounter = index;
-                accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
+                // connectivityCounter = index;
+                // console.log(connectivityCounter);
                 setTimeout(()=>{
-                    accordionContent[connectivityCounter].classList.add("map-active");
-                },300);
+                    accordionContentPlaceholder[index].classList.add("showhide");
+                    console.log(accordionContentPlaceholder[index].className);
+                },10)
+                
+                setTimeout(()=>{
+                    accordionContent[index].classList.add("map-active");
+                },200);
             });
         });
-    </script>
+    </script> -->
+
+<script>
+const accrodionContainer = document.querySelectorAll(".map-connectivity-section");
+const accordionContent = document.querySelectorAll(".map-connectivity-content");
+const accordionContentPlaceholder = document.querySelectorAll(".map-connectivity-showmore");
+
+accrodionContainer.forEach((element, index) => {
+    element.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // Collapse all sections
+        accordionContent.forEach((content, i) => {
+            content.style.maxHeight = "0px";
+            content.classList.remove("map-active");
+            accordionContentPlaceholder[i].classList.remove("showhide");
+        });
+
+        // Expand clicked section
+        const selectedContent = accordionContent[index];
+        const selectedPlaceholder = accordionContentPlaceholder[index];
+
+        selectedPlaceholder.classList.add("showhide");
+
+        // Allow the browser to render previous state before animating
+        setTimeout(() => {
+            selectedContent.classList.add("map-active");
+            selectedContent.style.maxHeight = selectedContent.scrollHeight + "px";
+        }, 10);
+    });
+});
+</script>
+
 </body>
 </html>

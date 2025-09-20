@@ -21,47 +21,35 @@
             })
         });
 
-        const accrodionContainer = document.querySelectorAll(".map-connectivity-section");
-        const accordionContent = document.querySelectorAll(".map-connectivity-content");
-        const accordionContentPlaceholder = document.querySelectorAll(".map-connectivity-showmore");
-        let connectivityCounter = 0;
-        let connectivityTimer = setInterval(connectivityCollapse,5000);
+      
+const accrodionContainer = document.querySelectorAll(".map-connectivity-section");
+const accordionContent = document.querySelectorAll(".map-connectivity-content");
+const accordionContentPlaceholder = document.querySelectorAll(".map-connectivity-showmore");
 
-        function connectivityCollapse() {
-            accordionContentPlaceholder[connectivityCounter].classList.remove("showhide");
-            accordionContent[connectivityCounter].classList.remove("map-active");
-            
-            
-            increaseConnectivityCount();
+accrodionContainer.forEach((element, index) => {
+    element.addEventListener("click", (e) => {
+        e.preventDefault();
 
-            accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
-            setTimeout(()=>{
-                accordionContent[connectivityCounter].classList.add("map-active");
-            },300)
-        }
-        function increaseConnectivityCount() {
-            connectivityCounter = (connectivityCounter + 1) % accrodionContainer.length;
-        }
-        function resetConnectivityCounter() {
-            clearInterval(connectivityTimer);
-            connectivityTimer = setInterval(connectivityCollapse,5000);
-        }
-
-        accrodionContainer.forEach((element,index)=>{
-            element.addEventListener("click",(e)=>{
-                e.preventDefault();
-                for(i=0;i<accrodionContainer.length;i++){
-                    accordionContentPlaceholder[i].classList.remove("showhide");
-                    accordionContent[i].classList.remove("map-active");
-                }
-                resetConnectivityCounter();
-                connectivityCounter = index;
-                accordionContentPlaceholder[connectivityCounter].classList.add("showhide");
-                setTimeout(()=>{
-                    accordionContent[connectivityCounter].classList.add("map-active");
-                },300);
-            });
+        // Collapse all sections
+        accordionContent.forEach((content, i) => {
+            content.style.maxHeight = "0px";
+            content.classList.remove("map-active");
+            accordionContentPlaceholder[i].classList.remove("showhide");
         });
+
+        // Expand clicked section
+        const selectedContent = accordionContent[index];
+        const selectedPlaceholder = accordionContentPlaceholder[index];
+
+        selectedPlaceholder.classList.add("showhide");
+
+        // Allow the browser to render previous state before animating
+        setTimeout(() => {
+            selectedContent.classList.add("map-active");
+            selectedContent.style.maxHeight = selectedContent.scrollHeight + "px";
+        }, 10);
+    });
+});
 
 
 
@@ -445,7 +433,6 @@ amenitiesSetupImageClickEvents() {
         const galleryLightboxContainer = document.querySelector(".gallery-lightboxContainer-overlay");
         const galleryImageHolder = document.querySelector(".gallery-lightbox-Imageholder");
         const galleryLightboxIndicator = document.querySelector(".gallery-lightBoxIndicator");
-        const body = document.querySelector('body');
         let galleryIndex = 0;
         const gallerycount = galleryImages.length + 1;
 
@@ -487,7 +474,7 @@ amenitiesSetupImageClickEvents() {
             galleryIndex = index;
             galleryLightboxImageChange();
             galleryLightboxContainer.style.display = "block";
-            body.style.overflowY = "hidden";
+            document.body.style.overflowY = "hidden";
             document.addEventListener("keydown",galleryKeyHandler)
           })
         });
@@ -504,7 +491,7 @@ amenitiesSetupImageClickEvents() {
 
         function galleryLightboxClose() {
           galleryLightboxContainer.style.display = "none";
-          body.style.overflowY = "visible";
+          document.body.style.overflowY = "visible";
           document.removeEventListener("keydown",galleryKeyHandler);
         }
 
@@ -712,7 +699,7 @@ document.querySelectorAll(".nav-button").forEach(element=>{
             document.getElementById("navModal").classList.toggle("navModal-active");
         }
         if (target === "#") {
-            console.log("trigger popup");
+            openpopup();
             return;
         }
         const targetsection = document.getElementById(target.substring(1));
@@ -721,3 +708,67 @@ document.querySelectorAll(".nav-button").forEach(element=>{
         })
     })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const popup = document.querySelector(".popup-container");
+
+        function closepopup() {
+            popup.style.display = "none";
+            if (document.querySelector(".gallery-lightboxContainer-overlay").style.display!= "block") {
+                document.body.style.overflowY = "visible";
+            }
+            document.removeEventListener("keydown",popupkeyevent);
+        }
+
+        function openpopup() {
+            popup.style.display = "block";
+            document.body.style.overflowY = "hidden";
+            document.addEventListener("keydown",popupkeyevent);
+        }
+
+        function popupkeyevent(e) {
+            if (e.key=="Escape") {
+                closepopup();
+            }
+        }
+
+        document.querySelectorAll(".popup-btn-close, .popup-overlay").forEach((element) => {
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                closepopup();
+            });
+        })
+
+        document.querySelectorAll(".popuptrigger").forEach(element=>{
+            element.addEventListener("click",(e)=>{
+                e.preventDefault();
+                openpopup();
+            });
+        });
+
+        window.addEventListener('load',()=>{
+            setTimeout(openpopup,4000)
+        })
+

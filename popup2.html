@@ -85,27 +85,6 @@
             padding: 2vh 2vw;
             width: 50%;
         }
-        .popup-offerList {
-            padding: 2vh 0;
-            list-style-type: none;
-        }
-        .popup-offerList li {
-            display: flex;
-            gap: 1vw;
-            padding: 1vh 0 0;
-        }
-        .popup-offerList li span {
-            font-size: clamp(1rem,1.5vw,3rem);
-            font-weight: 400;
-        }
-        .popup-leftHeading {
-            font-size: clamp(2rem,3vw,6rem);
-            font-weight: 700;
-        }
-        .popup-leftSubheading {
-            font-size: clamp(1.5rem,2vw,4rem);
-            font-weight: 500;
-        }
         .popup-rightHeading {
             font-size: clamp(1.5rem,2vw,4rem);
             font-weight: 600;
@@ -123,9 +102,9 @@
         .popup-formSubmitBtn {
             width: 100%;
             margin: 2vh  0;
-            padding: 1.5vh 1vw;
+            padding: 12px 24px;
             color: #fff;
-            background-color: green;
+            background-color: var(--darkest);
             border: 0;
             border-radius: 4px;
             font-size: 1rem;
@@ -163,14 +142,6 @@
             border-radius: 40px;
             box-sizing: border-box;
         }
-        .popup-freeSiteVisitImageContainer {
-            width: 100%;
-            text-align: center;
-        }
-        .popup-freeSiteVisitImage {
-            width:60%;
-            height: auto;
-        }
         @media (max-width:768px) {
             .popup-flexContainer {
                 flex-direction: column;
@@ -186,62 +157,11 @@
                 border-radius: 10px 10px 0 0 ;
                 text-align: center;
             }
-            .popup-leftDesktopContainer {
-                display: none;
-            }
             .popup-rightContainer {
                 text-align: center;
                 width: 100%;
             }
         }
-    </style>
-    <style>
-    .circle-container {
-  width: 15vw;
-  height: 15vw;
-  border: 2px dashed #fff;      /* Dashed border */
-  border-radius: 50%;           /* Circle shape */
-  position: relative;           /* For positioning child images */
-  margin: 50px auto;             /* Center horizontally */
-  color: #fff;
-}
-.imgContainer1 {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: clamp(0.5rem,1vw,1rem);
-}
-.imgContainer2 {
-    position: absolute;
-    bottom: 0%;
-    left: 0%;
-    transform: translate(-50%,50%);
-    font-size: clamp(0.5rem,1vw,1rem);
-}
-.imgContainer3 {
-    position: absolute;
-    bottom: 0%;
-    right: 0%;
-    transform: translate(50%,50%);
-    font-size: clamp(0.5rem,1vw,1rem);
-}
-.circle-img {
-  width: 60px;                   /* Small image size */
-  height: 60px;
-  object-fit: cover;
-  border-radius: 50%;
-  position: absolute;
-  border: 3px solid white;       /* Optional border around images */
-}
-
-/* Position images along the circle border */
-.img1 {
-
-  width: 5vw;
-  height: 5vw;
-}
-
 .popup-image {
     position: relative;
     transform: translateY(-50%);
@@ -286,42 +206,7 @@
             <button class="popup-btn-close"><i class="fa fa-close"></i></button>
             <div class="popup-leftContainer">
                 <img src="assets/images/extra/popupimage.png" alt="Image" class="popup-imageLeft" loading="lazy">
-                <img src="assets/images/logo/logo.webp" alt="popup Logo" loading="lazy" class="popup-logo">
-                <!-- <h1 class="popup-leftHeading">Cander Skyline</h1>
-                <div class="popup-leftDesktopContainer">
-                <p class="popup-leftSubheading">Book Now to Avail Offers</p>
-                <ul class="popup-offerList">
-                    <li><span>✔</span><span>4 Tallest Towers with Glass facades</span></li>
-                    <li><span>✔</span><span>60,000 sq. ft. Amenities Space</span></li>
-                    <li><span>✔</span><span>Early Booking Offer</span></li>
-                </ul>
-                <div class="circle-container">
-                        <div class="imgContainer1">
-                            <div class="popup-image">
-                            <img src="assets/images/icons/client.webp" class=" img1" alt="Image 1" loading=lazy>
-                            <p>Get Instant call</p>
-                            </div>
-                        </div>
-
-                        <div class="imgContainer2">
-                            <div class="popup-image">
-                            <img src="assets/images/icons/sitevisit.webp" class=" img1" alt="Image 1" loading=lazy>
-                            <p>Free Site Visit</p>
-                            </div>
-                        </div>
-
-                        <div class="imgContainer3">
-                            <div class="popup-image">
-                            <img src="assets/images/icons/salary.webp" class=" img1" alt="Image 1" loading="lazy">
-                            <p>Unmatched Price</p>
-                            </div>
-                        </div>
-                </div> -->
-                <!-- <div class="popup-freeSiteVisitImageContainer">
-                <img src="assets/images/icons/image.webp" alt="Book Now to Avail Free Site Visit" loading="lazy" class="popup-freeSiteVisitImage">
-            </div> -->
-            <!-- </div> -->
-            
+                <img src="assets/images/logo/logo.webp" alt="popup Logo" loading="lazy" class="popup-logo">            
             </div>
             <div class="popup-rightContainer">
                 <h2 class="popup-rightHeading">Limited Time Offer!</h1>
@@ -362,13 +247,20 @@
         function closepopup() {
             popup.style.display = "none";
             document.body.style.overflowY = "visible";
+            document.removeEventListener("keydown",popupkeyevent);
         }
 
         function openpopup() {
             popup.style.display = "block";
             document.body.style.overflowY = "hidden";
+            document.addEventListener("keydown",popupkeyevent);
         }
 
+        function popupkeyevent(e) {
+            if (e.key=="Escape") {
+                closepopup();
+            }
+        }
 
         document.querySelectorAll(".popup-btn-close, .popup-overlay").forEach((element) => {
             element.addEventListener("click",(e)=>{

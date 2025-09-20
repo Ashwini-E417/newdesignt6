@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="assets/css/style.css" >
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/main.css">
             <!-- Preconnect to speed up DNS + TLS handshake -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,7 +85,7 @@
             <p class="banner-projectLocation">At Finanical District, Hyderabad</p>
             </div>
             <p class="banner-subHeading">Luxurious 4 BHK Apartments & Sky Villas Starts <span class="banner-price">₹ <strong>9 Cr*</strong> Onwards</span></p>
-            <button class="bannerEnquireBtn" aria-label="Enquire More about Candeur Skyline">Enquire Now</button>
+            <button class="bannerEnquireBtn popuptrigger" aria-label="Enquire More about Candeur Skyline">Enquire Now</button>
         </section>
         <div class="OfferBannerContainer">
             <div class="OfferBanner">
@@ -102,7 +102,7 @@
             </div>
         </div>
         <div class="downloadButtonContainer bannerMobileEnquire">
-            <button class="downloadButton">Enquire Now</button>
+            <button class="downloadButton popuptrigger">Enquire Now</button>
         </div>
     </main>
     <div class="bannerFormSection">
@@ -176,6 +176,9 @@
                     <p class="highlightpoint-content">Wind & Earthquake-Resistant Structure</p>
                 </div>
             </div>
+            <div class="downloadButtonContainer">
+                <button class="downloadButton popuptrigger">Enquire Now</button>
+            </div>
         </div>
     </section>
 
@@ -245,7 +248,7 @@
             </div>
 
             <div class="downloadButtonContainer">
-                <button class="downloadButton" aria-label="Download All Amenities">Download Amenities</button>
+                <button class="downloadButton popuptrigger" aria-label="Download All Amenities">Download Amenities</button>
             </div>
         
         <!-- <div class="amenities-navigation" id="amenitiesDots">
@@ -270,6 +273,28 @@
         </div>
     </div>
      </section>
+
+     <!-- CTA -->
+      <section>
+        <div class="cta-section">
+            <div class="cta-leftsection">
+                <p class="cta-heading">Elevate Your Lifestyle</p>
+                <p class="cta-subheading">Experience luxury living at its finest. Book now and schedule a complimentary site visit to discover your dream home.</p>
+
+                <div class="cta-offerContainer">
+                    <p class="cta-offer"><i class="fa fa-home"></i>Premium Residence</p>
+                    <p class="cta-offer"><i class="fa fa-car"></i>Free Site Visit</p>
+                    <p class="cta-offer"><i class="fa fa-gift"></i>Discover unparalled Offer</p>
+                </div>
+                <div class="downloadButtonContainer">
+                    <button class="downloadButton popuptrigger"> Book Now </button>
+                </div>
+            </div>
+            <div class="cta-rightSection">
+            <img src="assets/images/banner/banner.webp" alt="Happy Home" loading="lazy" class="cta-image">
+            </div>
+        </div>
+    </section>
     
      <!-- floor and price plan -->
       <section id="floorprice">
@@ -279,12 +304,12 @@
         <div class="floorplan-flexContainer">
             <div class="floorplan-imgCarouselContainer">
                 <div class="floorplanCarousel">
-                    <div class="floorcard">
+                    <div class="floorcard popuptrigger">
                         <img src="assets/images/banner/banner.webp" alt="Floor Plan" loading="lazy" width="100%" height="90%" class="floorImg"/>
                         <p class="floorplan-textOverlay">Master Plan</p>
                         <button class="floorClickBtn">Download Plan</button>
                     </div>
-                    <div class="floorcard">
+                    <div class="floorcard popuptrigger">
                         <img src="assets/images/banner/banner.webp" alt="Floor Plan" loading="lazy" width="100%" height="90%" class="floorImg"/>
                         <p class="floorplan-textOverlay">Floor Plan</p>
                         <button class="floorClickBtn">Download Plan</button>
@@ -308,20 +333,20 @@
                 <div class="pricerow">
                     <p class="pricetype">2 BHK</p>
                     <p class="priceCarpet">850 Sq. FT</p>
-                    <p class="pricevalue">85 Onwards <a href="#" title="Get Detailed Structure"><i class="fa fa-square-arrow-up-right map-connectivity-arrow" aria-hidden="true"></i></a></p>
+                    <p class="pricevalue">85 Onwards <a href="#" title="Get Detailed Structure" class="popuptrigger"><i class="fa fa-square-arrow-up-right map-connectivity-arrow" aria-hidden="true"></i></a></p>
                 </div>
                 <div class="pricerow">
                     <p class="pricetype">2 BHK Penthouse</p>
                     <p class="priceCarpet">850 Sq. FT</p>
-                    <p class="pricevalue">85 Onwards <a href="#" title="Get Detailed Structure"><i class="fa fa-square-arrow-up-right map-connectivity-arrow" aria-hidden="true"></i></a></p>
+                    <p class="pricevalue">85 Onwards <a href="#" title="Get Detailed Structure" class="popuptrigger"><i class="fa fa-square-arrow-up-right map-connectivity-arrow" aria-hidden="true"></i></a></p>
                 </div>
                 <div class="pricerow">
                     <p class="pricetype">2 BHK</p>
                     <p class="priceCarpet">850 Sq. FT</p>
-                    <p class="pricevalue">85 Onwards <a href="#" title="Get Detailed Structure"><i class="fa fa-square-arrow-up-right map-connectivity-arrow" aria-hidden="true"></i></a></p>
+                    <p class="pricevalue">85 Onwards <a href="#" title="Get Detailed Structure" class="popuptrigger"><i class="fa fa-square-arrow-up-right map-connectivity-arrow" aria-hidden="true"></i></a></p>
                 </div>
                 <div class="downloadButtonContainer">
-                    <button class="downloadButton">Get Pricing Details</button>
+                    <button class="downloadButton popuptrigger">Get Pricing Details</button>
                 </div>
             </div>
         </div>
@@ -354,15 +379,15 @@
       </div>
 
       <div class="downloadButtonContainer">
-        <button class="downloadButton">Download Gallery</button>
+        <button class="downloadButton popuptrigger">Download Gallery</button>
       </div>
     </div>
 
     <div class="gallery-lightboxContainer-overlay">
       <div class="gallery-lightboxContainer">
-        <div class="gallery-lightbox-text">
+        <div class="gallery-lightbox-text popuptrigger">
           <p>Need More Images</p>
-          <button class="gallery-lightbox-button">Download Now</button>
+          <button class="gallery-lightbox-button popuptrigger">Download Now</button>
         </div>
 
         <button class="gallery-lightbox-close gallery-lightbox-controls" aria-label="Close Gallery Preview"><i class="fa fa-close" aria-hidden="true"></i></button>
@@ -438,10 +463,7 @@
 
                             <div class=map-connectivity-items>
 
-                            <div class=map-advantage-item>
-                            <div class=map-advantage-text>Kempegowda International Airport</div>
-                            <div class=map-advantage-number>12 mins</div>
-                            </div>
+                            
 
                             <div class=map-advantage-item>
                             <div class=map-advantage-text>Kempegowda International Airport</div>
@@ -544,7 +566,7 @@
             </div>
 
             <div class="downloadButtonContainer">
-                <button class="downloadButton">Enquire Now</button>
+                <button class="downloadButton popuptrigger">Enquire Now</button>
             </div>
 
         </div>
@@ -554,7 +576,7 @@
      <section id="virtual">
         <div class="virtual-sectionContainer">
             <h2 class="section-headingCenter">Virtual/360<sup>o</sup> Tour</h2>
-            <div class="virtualimage-container">
+            <div class="virtualimage-container popuptrigger">
                 <img src="assets/images/banner/banner.webp" alt="Virtual Image" loading="lazy" class="virtualImage" />
                 <div class="virtual-overlay"></div>
                 <p class="virtual-videoheading">
@@ -665,6 +687,81 @@ Project RERA: P51700046312
 <a href=https://www.homesfy.co.in/terms.html target=_blank rel="noopener noreferrer" class=footer-rera-link role=link>Terms & Conditions</a>
 </div>
 </footer>
+
+
+<!-- Popup HTML -->
+ <section>
+        <div class="popup-container">
+        <div class="popup-overlay"></div>
+        <div class="popup-flexContainer">
+            <button class="popup-btn-close"><i class="fa fa-close"></i></button>
+            <div class="popup-leftContainer">
+                <img src="assets/images/extra/popupimage.png" alt="Image" class="popup-imageLeft" loading="lazy">
+                <img src="assets/images/logo/logo.webp" alt="popup Logo" loading="lazy" class="popup-logo">            
+            </div>
+            <div class="popup-rightContainer">
+                <h2 class="popup-rightHeading">Limited Time Offer!</h1>
+                <p class="popup-rightSubheading">Fill the form</p>
+                <form>
+                    <div class="input-group">
+                    <input type="text" placeholder="Enter Your Name" aria-label="Enter Your Name" class="input-box" required/>
+                    </div>
+                    <div class="input-group">
+                    <select required class="input-box" aria-label="Select Country Code">
+                        <option value="+91" selected>+91 (India)</option>
+                    </select>
+                    </div>
+                    <div class="input-group">
+                    <input type="text" placeholder="Enter Mobile Number" aria-label="Enter Mobile Number" class="input-box" required/>
+                    </div>
+                    <div class="input-group input-group2">
+                    <input type="checkbox"  id="popup-formCheckbox" required/>
+                    <label for="popup-formCheckbox" class="consent-checkbox1">I consent to the use of provided data in accordance with the <a href="https://www.homesfy.co.in/privacy.html" target="_blank" rel="noopner noreferer" class="">privacy policy</a></label>
+                    </div>
+                    <button class="popup-formSubmitBtn">Submit</button>
+                </form>
+                <p class="popup-rightDivider">OR</p>
+                <div class="popup-IvrContainer">
+                    <button class="popup-callBtn" aria-label="Speak with Marketing Advisor" style="border: 1px solid #000;background-color: #fff;"><img src="assets/images/icons/phoneblack.gif" alt="Call Support" width="30" height="30" loading="lazy"><span>Call Now</span></button>
+                    <button class="popup-callBtn" aria-label="Chat with Marketing Advisor" style="border: 0;background-color: #4dcd5b;color: #fff;"><img src="assets/images/icons/whatsappIcon.gif" alt="Chat on" width="30" height="30" loading="lazy"><span>Whatsapp</span></button>
+                </div>
+            </div>
+        </div>
+        </div>
+       
+    </section>
+
+
+<section id="footer-ivr">
+    <div class="footer-IvrContainer">
+        <a href="#" class="footerCall"><img src="assets/images/icons/phoneIcoon.gif" alt="Call Support" height=25 width="25" loading="lazy">Call</a>
+        <a href="#" class="footerCall"><img src="assets/images/icons/whatsappIcon.gif" alt="Chat Support" width="25" height="25" loading="lazy">Whatsapp</a>
+        <a href="#" class="footerCall popuptrigger"><img src="assets/images/icons/downloadIcon.gif" alt="Call Support" width="25" height="25" loading="lazy">Brochure</a>
+    </div>
+</section>
+
+<style>
+    #footer-ivr {display: none;}
+    .footer-IvrContainer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--darkest);
+        color: #fff;
+        padding: 10px;
+    }
+    .footerCall {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    @media (max-width:768px) {
+        #footer-ivr {display: block;}
+    }
+</style>
 
     <script src="assets/js/script.js"></script>
 </body>

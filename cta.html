@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+     <!-- Preconnect to speed up DNS + TLS handshake -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the font stylesheet so it downloads ASAP -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+
+<!-- Load without render-blocking -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'">
+
+<!-- Fallback for browsers with JS disabled -->
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+</noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+<style>
+    .cta-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+        padding: 5vh 5vw;
+        background-color: #f0f0f0;
+    }
+    .cta-leftsection {
+        flex: 0 0 60%;
+        text-align: center;
+        padding: 2vh 2vw;
+    }
+    .cta-rightSection {
+        flex: 0 0 40%;
+        border-radius: 10px;
+    }
+    .cta-image {
+        width: 100%;
+        border-radius: 10px;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .cta-heading {
+        font-size: clamp(1.5rem,3vw,3rem);  
+        color: var(--darkest); 
+    }
+    .cta-offerContainer {
+        display: flex;
+        justify-content: center;
+        gap: 1vh;
+        margin-top: 2vh;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .cta-offer {
+        background-color: #fff;
+        color: var(--darkest);
+        padding: 1vh 2vw;
+        /* width: fit-content; */
+        border-radius: 50px;
+        box-shadow: var(--shadow-medium);
+        border-bottom: 1px solid var(--darkest);
+    }
+    .cta-offer i {
+        background: #fff;
+        padding: 7px;
+        margin-right: 5px;
+        border-radius: 50%;
+    }
+    @media (max-width:768px) {
+        .cta-section {
+            flex-direction: column-reverse;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <section>
+        <div class="cta-section">
+            <div class="cta-leftsection">
+                <p class="cta-heading">Elevate Your Lifestyle</p>
+                <p class="cta-subheading">Experience luxury living at its finest. Book now and schedule a complimentary site visit to discover your dream home.</p>
+
+                <div class="cta-offerContainer">
+                    <p class="cta-offer"><i class="fa fa-home"></i>Premium Residence</p>
+                    <p class="cta-offer"><i class="fa fa-car"></i>Free Site Visit</p>
+                    <p class="cta-offer"><i class="fa fa-gift"></i>Discover unparalled Offer</p>
+                </div>
+                <div class="downloadButtonContainer">
+                    <button class="downloadButton"> Book Now </button>
+                </div>
+            </div>
+            <div class="cta-rightSection">
+            <img src="assets/images/banner/banner.webp" alt="Happy Home" loading="lazy" class="cta-image">
+            </div>
+        </div>
+    </section>
+</body>
+</html>
