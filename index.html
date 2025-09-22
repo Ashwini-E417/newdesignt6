@@ -133,7 +133,7 @@
 
     <!-- Overview -->
      <section class="section-container fade-up" id="overview">
-        <div class="overview-Container">
+        <div class="overview-Container" role="contentinfo">
             <div class="overview-flexRightContainer">
                 <h2 class="section-headingCenter">Overview</h2>
                 <p class="section-subHeading">Welcome to Candeur Skyline</p>
@@ -152,7 +152,7 @@
     <!-- highlight -->
 
     <section class="section-container fade-up">
-        <div class="highlight-Container">
+        <div class="highlight-Container" role="contentinfo">
             <h2 class="section-headingCenter">Project Highlight</h2>
             <p class="section-subHeading">Explore Candeur Skyline</p>
             <div class="highlight-pointContainer">
@@ -260,14 +260,14 @@
     <div class="amenities-lightbox" id="amenitiesLightbox">
         <div class="amenities-lightbox-content">
             <button class="amenities-lightbox-close" id="amenitiesLightboxClose" aria-label="Close Amenities Preview">
-                <i class="fas fa-times"></i>
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
             <button class="amenities-lightbox-nav amenities-lightbox-prev" id="amenitiesLightboxPrev" aria-label="View Previous Amenities">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </button>
             <img class="amenities-lightbox-image" id="amenitiesLightboxImage" src="" alt="" loading="lazy">
             <button class="amenities-lightbox-nav amenities-lightbox-next" id="amenitiesLightboxNext" aria-label="View Next Amenities">
-                <i class="fas fa-chevron-right"></i>
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
             </button>
             <div class="amenities-lightbox-title" id="amenitiesLightboxTitle"></div>
             <div class="amenities-lightbox-counter" id="amenitiesLightboxCounter">1 / 6</div>
@@ -393,8 +393,8 @@
 
         <button class="gallery-lightbox-close gallery-lightbox-controls" aria-label="Close Gallery Preview"><i class="fa fa-close" aria-hidden="true"></i></button>
         <button class="gallery-lightbox-left gallery-lightbox-controls" aria-label="View Previous Gallery Image"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-        <button class="gallery-lightbox-right gallery-lightbox-controls" aria-label="View Next Gallery Image"><i class="fa fa-chevron-right"></i></button>
-        <img src="" alt="" class="gallery-lightbox-Imageholder" loading="lazy">
+        <button class="gallery-lightbox-right gallery-lightbox-controls" aria-label="View Next Gallery Image"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+        <img src="" alt="Image" class="gallery-lightbox-Imageholder" loading="lazy">
         <div class="gallery-lightBoxIndicator">1/7</div>
         
       </div>
@@ -695,7 +695,7 @@ Project RERA: P51700046312
         <div class="popup-container">
         <div class="popup-overlay"></div>
         <div class="popup-flexContainer">
-            <button class="popup-btn-close"><i class="fa fa-close"></i></button>
+            <button class="popup-btn-close" aria-label="Close Popup"><i class="fa fa-close" aria-hidden="true"></i></button>
             <div class="popup-leftContainer">
                 <img src="assets/images/extra/popupimage.png" alt="Image" class="popup-imageLeft" loading="lazy">
                 <img src="assets/images/logo/logo.webp" alt="popup Logo" loading="lazy" class="popup-logo">            
@@ -705,7 +705,7 @@ Project RERA: P51700046312
                 <p class="popup-rightSubheading">Fill the form</p>
                 <form>
                     <div class="input-group">
-                    <input type="text" placeholder="Enter Your Name" aria-label="Enter Your Name" class="input-box" required/>
+                    <input type="text" placeholder="Enter Your Name" aria-label="Enter Your Name" class="input-box" required autocomplete="name"/>
                     </div>
                     <div class="input-group">
                     <select required class="input-box" aria-label="Select Country Code">
@@ -713,7 +713,7 @@ Project RERA: P51700046312
                     </select>
                     </div>
                     <div class="input-group">
-                    <input type="text" placeholder="Enter Mobile Number" aria-label="Enter Mobile Number" class="input-box" required/>
+                    <input type="text" placeholder="Enter Mobile Number" aria-label="Enter Mobile Number" class="input-box" required autocomplete="mobile"/>
                     </div>
                     <div class="input-group input-group2">
                     <input type="checkbox"  id="popup-formCheckbox" required checked/>
